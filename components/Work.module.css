@@ -1,0 +1,162 @@
+.section {
+  padding: 7rem 3rem;
+  background: var(--cream);
+}
+
+.header {
+  margin-bottom: 3rem;
+}
+
+.tag {
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+
+.headline {
+  font-family: var(--serif);
+  font-size: clamp(2.4rem, 5vw, 4.5rem);
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+
+/* Filters */
+.filters {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+}
+
+.filterBtn {
+  padding: 0.45rem 1.1rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  transition: all 0.2s;
+  font-family: var(--sans);
+}
+
+.filterBtn:hover {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+.filterActive {
+  background: var(--ink);
+  color: var(--cream);
+  border-color: var(--ink);
+}
+
+/* Project list */
+.grid {
+  border-top: 1px solid var(--border);
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 2rem 0;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.2s;
+  cursor: pointer;
+}
+
+.item:hover {
+  background: rgba(0,0,0,0.02);
+}
+
+.item:hover .arrow {
+  transform: translateX(4px);
+  color: var(--accent);
+}
+
+.itemLeft {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+  flex: 1;
+}
+
+.num {
+  font-family: var(--serif);
+  font-size: 0.85rem;
+  color: var(--muted);
+  opacity: 0.5;
+  padding-top: 0.15rem;
+  min-width: 2rem;
+}
+
+.projectName {
+  font-family: var(--serif);
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: 0.4rem;
+}
+
+.projectDesc {
+  font-size: 0.83rem;
+  color: var(--muted);
+  line-height: 1.6;
+  max-width: 420px;
+}
+
+.itemRight {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-shrink: 0;
+}
+
+.type {
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.year {
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  opacity: 0.5;
+}
+
+.arrow {
+  font-size: 1.2rem;
+  color: var(--ink);
+  transition: transform 0.25s, color 0.25s;
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 5rem 1.5rem;
+  }
+
+  .item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.5rem 0;
+  }
+
+  .itemLeft {
+    gap: 1rem;
+  }
+
+  .itemRight {
+    gap: 1rem;
+    padding-left: 3rem;
+  }
+
+  .projectDesc {
+    display: none;
+  }
+}

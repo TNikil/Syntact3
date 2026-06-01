@@ -1,0 +1,104 @@
+.section {
+  background: var(--ink);
+  color: var(--cream);
+  padding: 7rem 3rem;
+}
+
+.tag {
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.35);
+  margin-bottom: 1.2rem;
+}
+
+.headline {
+  font-family: var(--serif);
+  font-size: clamp(2.4rem, 5vw, 4.5rem);
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  color: var(--cream);
+  margin-bottom: 4rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.card {
+  padding: 2.5rem 2.5rem 2.5rem 0;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.card:last-child {
+  border-right: none;
+  padding-right: 0;
+}
+
+.card:not(:first-child) {
+  padding-left: 2.5rem;
+}
+
+.num {
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  color: rgba(255, 255, 255, 0.25);
+  margin-bottom: 1.5rem;
+}
+
+.cardName {
+  font-family: var(--serif);
+  font-size: 1.4rem;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  margin-bottom: 0.9rem;
+  color: var(--cream);
+}
+
+.cardDesc {
+  font-size: 0.85rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.45);
+  margin-bottom: 1.5rem;
+}
+
+.list {
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.listItem {
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.35);
+  padding: 0.55rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  line-height: 1.5;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    padding: 2.5rem 0;
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .card:not(:first-child) {
+    padding-left: 0;
+  }
+
+  .card:last-child {
+    border-bottom: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 5rem 1.5rem;
+  }
+}
