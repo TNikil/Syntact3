@@ -8,10 +8,10 @@ const stats = [
 ];
 
 const team = [
-  { initials: 'TM', name: 'Tuesh Mali', role: 'Lead Developer' },
-  { initials: 'SR', name: 'Sarinja Randers', role: 'Graphic Designer' },
-  { initials: 'HP', name: 'Hector Perers', role: 'UI Designer' },
-  { initials: 'EB', name: 'Eranga Balasingham', role: 'Strategist' },
+  { initials: 'TN', name: 'Toash Nikil', role: 'Lead Developer' },
+  { initials: 'SB', name: 'Sanajaya Bandara', role: 'Lead Developer' },
+  { initials: 'HP', name: 'Hector Perera', role: 'Copywritter' },
+  { initials: 'EB', name: 'Eranga Balasingham', role: 'Graphic Designer' },
 ];
 
 export default function About() {
