@@ -39,6 +39,7 @@
   color: var(--muted);
   transition: all 0.2s;
   font-family: var(--sans);
+  cursor: pointer;
 }
 
 .filterBtn:hover {
@@ -57,23 +58,34 @@
   border-top: 1px solid var(--border);
 }
 
+/* Base grid layout for items with images (Logo, Poster, Flyer) */
 .item {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1.5fr 1.2fr 0.8fr; 
   align-items: center;
-  justify-content: space-between;
-  gap: 1.5rem;
+  gap: 3rem;
   padding: 2rem 0;
   border-bottom: 1px solid var(--border);
   transition: background 0.2s;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Special modifier layout just for Web projects (removes image track column) */
+.webItem {
+  grid-template-columns: 1fr auto; 
+}
+
+.linkItem {
   cursor: pointer;
 }
 
 .item:hover {
-  background: rgba(0,0,0,0.02);
+  background: rgba(0, 0, 0, 0.01);
 }
 
 .item:hover .arrow {
-  transform: translateX(4px);
+  transform: translateX(6px);
   color: var(--accent);
 }
 
@@ -81,7 +93,6 @@
   display: flex;
   align-items: flex-start;
   gap: 2rem;
-  flex: 1;
 }
 
 .num {
@@ -108,11 +119,39 @@
   max-width: 420px;
 }
 
+/* Non-Web Image Previews */
+.imagePreview {
+  width: 100%;
+  height: 140px; 
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  opacity: 0.95;
+  transition: opacity 0.2s ease;
+}
+
+.item:hover .imagePreview {
+  opacity: 1;
+}
+
+.imagePreview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.placeholder {
+  width: 100%;
+  height: 100%;
+  background: var(--border);
+  opacity: 0.3;
+}
+
 .itemRight {
   display: flex;
   align-items: center;
+  justify-content: flex-end; 
   gap: 1.5rem;
-  flex-shrink: 0;
 }
 
 .type {
@@ -133,6 +172,22 @@
   font-size: 1.2rem;
   color: var(--ink);
   transition: transform 0.25s, color 0.25s;
+  display: inline-block;
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 992px) {
+  .item {
+    grid-template-columns: 1.5fr 1fr;
+    gap: 2rem;
+  }
+  .itemRight {
+    display: none; 
+  }
+  .webItem {
+    display: flex;
+    justify-content: space-between;
+  }
 }
 
 @media (max-width: 768px) {
@@ -140,7 +195,8 @@
     padding: 5rem 1.5rem;
   }
 
-  .item {
+  .item, .webItem {
+    display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 1rem;
@@ -151,12 +207,12 @@
     gap: 1rem;
   }
 
-  .itemRight {
-    gap: 1rem;
-    padding-left: 3rem;
+  .projectDesc {
+    display: none; /* Keeps it exactly clean like your native configuration screenshot */
   }
 
-  .projectDesc {
-    display: none;
+  .imagePreview {
+    height: 160px;
+    width: 100%;
   }
 }
