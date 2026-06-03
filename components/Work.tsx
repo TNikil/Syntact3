@@ -4,22 +4,59 @@ import { useState } from 'react';
 import styles from './Work.module.css';
 
 const projects = [
-  { name: 'Travel Agency', type: 'Web', year: '2024', desc: 'Full brand identity and booking platform for a boutique travel company.' },
-  { name: 'Grace Portfolio', type: 'Web', year: '2024', desc: 'Minimal portfolio site for a photographer with custom gallery and CMS.' },
-  { name: 'Music Party', type: 'Poster', year: '2023', desc: 'Bold event poster series for an underground music collective.' },
-  { name: 'Lotus Beverage', type: 'Logo', year: '2023', desc: 'Clean logo and packaging system for an organic beverage brand.' },
-  { name: 'Rian Rest Apartment', type: 'Web', year: '2023', desc: 'Airbnb-style listing site with booking flow for a luxury apartment.' },
-  { name: 'Zephyr Brand Kit', type: 'Logo', year: '2024', desc: 'Complete visual identity system including logo, colors, and typography.' },
+  { 
+    name: 'Blossom Flowers', 
+    type: 'Web', 
+    year: '2024', 
+    desc: 'Bespoke digital storefront and curation platform for an artisan floral boutique.',
+    link: 'https://vandradur.github.io/blossom/', 
+    image: '/images/blossom-flowers.jpg' 
+  },
+  { 
+    name: 'Grace Portfolio', 
+    type: 'Web', 
+    year: '2024', 
+    desc: 'Minimal portfolio site for a photographer with custom gallery and CMS.',
+    link: 'https://example.com/grace', 
+    image: '/images/grace-portfolio.jpg' 
+  },
+  { 
+    name: 'Music Party', 
+    type: 'Poster', 
+    year: '2023', 
+    desc: 'Bold event poster series for an underground music collective.',
+    image: '/images/music-party.jpg' 
+  },
+  { 
+    name: 'Lotus Beverage', 
+    type: 'Logo', 
+    year: '2023', 
+    desc: 'Clean logo and packaging system for an organic beverage brand.',
+    image: '/images/lotus-beverage.jpg' 
+  },
+  { 
+    name: 'Rian Rest Apartment', 
+    type: 'Web', 
+    year: '2023', 
+    desc: 'Airbnb-style listing site with booking flow for a luxury apartment.',
+    link: 'https://rianrest.com', 
+    image: '/images/rian-rest.jpg' 
+  },
+  { 
+    name: 'Zephyr Brand Kit', 
+    type: 'Logo', 
+    year: '2024', 
+    desc: 'Complete visual identity system including logo, colors, and typography.',
+    image: '/images/zephyr-kit.jpg' 
+  },
 ];
 
-const filters = ['All', 'Web', 'Logo', 'Poster', 'Flyer'];
+const filters = ['Web', 'Logo', 'Poster', 'Flyer'];
 
 export default function Work() {
-  const [active, setActive] = useState('All');
+  const [active, setActive] = useState('Web');
 
-  const filtered = active === 'All'
-    ? projects
-    : projects.filter((p) => p.type === active);
+  const filtered = projects.filter((p) => p.type.toLowerCase() === active.toLowerCase());
 
   return (
     <section className={styles.section} id="work">
@@ -43,22 +80,60 @@ export default function Work() {
       </div>
 
       <div className={styles.grid}>
-        {filtered.map((p, i) => (
-          <div className={styles.item} key={p.name}>
-            <div className={styles.itemLeft}>
-              <span className={styles.num}>0{i + 1}</span>
-              <div>
-                <h3 className={styles.projectName}>{p.name}</h3>
-                <p className={styles.projectDesc}>{p.desc}</p>
+        {filtered.map((p, i) => {
+          const isWeb = p.type.toLowerCase() === 'web';
+          
+          const rowInnerContent = (
+            <>
+              {/* Left text column */}
+              <div className={styles.itemLeft}>
+                <span className={styles.num}>0{i + 1}</span>
+                <div>
+                  <h3 className={styles.projectName}>{p.name}</h3>
+                  <p className={styles.projectDesc}>{p.desc}</p>
+                </div>
               </div>
+
+              {/* Middle image preview column - ONLY renders if NOT a web item */}
+              {!isWeb && (
+                <div className={styles.imagePreview}>
+                  {p.image ? (
+                    <img src={p.image} alt={p.name} />
+                  ) : (
+                    <div className={styles.placeholder}></div>
+                  )}
+                </div>
+              )}
+
+              {/* Right details column */}
+              <div className={styles.itemRight}>
+                <span className={styles.type}>{p.type}</span>
+                <span className={styles.year}>{p.year}</span>
+                <span className={styles.arrow}>→</span>
+              </div>
+            </>
+          );
+
+          if (isWeb) {
+            return (
+              <a 
+                href={p.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`${styles.item} ${styles.linkItem} ${styles.webItem}`} 
+                key={p.name}
+              >
+                {rowInnerContent}
+              </a>
+            );
+          }
+
+          return (
+            <div className={styles.item} key={p.name}>
+              {rowInnerContent}
             </div>
-            <div className={styles.itemRight}>
-              <span className={styles.type}>{p.type}</span>
-              <span className={styles.year}>{p.year}</span>
-              <a href="#" className={styles.arrow}>→</a>
-            </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </section>
   );
