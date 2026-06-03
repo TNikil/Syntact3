@@ -2,7 +2,7 @@ import styles from './Footer.module.css';
 
 const socials = [
   { label: 'Instagram', href: 'https://www.instagram.com/syntact3' },
-  { label: 'Behance', href: '#' }, 
+  { label: 'Facebook', href: 'https://www.facebook.com/syntact3' }, 
   { label: 'LinkedIn', href: 'https://www.linkedin.com/company/syntact3' },
 ];
 
