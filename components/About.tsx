@@ -19,7 +19,7 @@ const team = [
     initials: 'SB', 
     name: 'Sanjaya Bandara', 
     role: 'Lead Developer', 
-    image: '/images/sanjaya.jpg', 
+    image: '/team/sanjaya.jpg',
     linkedin: 'https://linkedin.com/in/sanjaya' 
   },
   { 
