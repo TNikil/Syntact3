@@ -20,7 +20,7 @@ const team = [
     name: 'Sanjaya Bandara', 
     role: 'Lead Developer', 
     image: '/team/sanjaya.jpg',
-    linkedin: 'https://linkedin.com/in/sanjaya' 
+    linkedin: 'https://www.linkedin.com/in/sanjaya-senarathne-3658273a/' 
   },
   { 
     initials: 'HP', 
