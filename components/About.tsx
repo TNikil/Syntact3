@@ -12,13 +12,13 @@ const team = [
     initials: 'TN', 
     name: 'Toash Nikil', 
     role: 'Lead Developer', 
-    image: '/images/toash.jpg', // Path to public folder or imports
+    image: '/images/toash.jpg', 
     linkedin: 'https://linkedin.com/in/your-profile' 
   },
   { 
     initials: 'SB', 
     name: 'Sanjaya Bandara', 
-    role: 'Graphic Designer', 
+    role: 'Lead Developer', 
     image: '/images/sanjaya.jpg', 
     linkedin: 'https://linkedin.com/in/sanjaya' 
   },
