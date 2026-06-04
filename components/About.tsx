@@ -12,7 +12,7 @@ const team = [
     initials: 'TN', 
     name: 'Toash Nikil', 
     role: 'Lead Developer', 
-    image: '/images/toash.jpg', 
+    image: '/team/toash.jpg', 
     linkedin: 'https://linkedin.com/in/your-profile' 
   },
   { 
@@ -26,14 +26,14 @@ const team = [
     initials: 'HP', 
     name: 'Hector Perers', 
     role: 'copywriter', 
-    image: '/images/hector.jpg', 
+    image: '/team/hector.jpg', 
     linkedin: 'https://linkedin.com/in/hector' 
   },
   { 
     initials: 'EB', 
     name: 'Eranga Balasingham', 
     role: 'Graphic Designer', 
-    image: '/images/eranga.jpg', 
+    image: '/team/eranga.jpg', 
     linkedin: 'https://linkedin.com/in/eranga' 
   },
 ];
