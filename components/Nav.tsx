@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import styles from './Nav.module.css';
 
 const links = [
@@ -25,7 +26,17 @@ export default function Nav() {
   return (
     <>
       <nav className={`${styles.nav} ${scrolled ? styles.scrolled : ''}`}>
-        <a href="#" className={styles.logo}>Syntac</a>
+        {/* Logo wrapper targeting the updated flex layout container */}
+        <a href="#" className={styles.logo}>
+          <Image 
+            src="/logo.png" 
+            alt="Syntac Logo" 
+            width={200}
+            height={50}
+            priority 
+            style={{ height: '100%', width: 'auto', objectFit: 'contain' }} 
+          />
+        </a>
 
         {/* Desktop links */}
         <ul className={styles.links}>
