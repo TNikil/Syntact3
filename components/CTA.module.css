@@ -1,6 +1,6 @@
 .section {
   background: var(--accent);
-  padding: 10rem 4rem; /
+  padding: 10rem 4rem; 
 }
 
 .inner {
@@ -62,6 +62,7 @@
 
 .btnWhite:hover::after {
   transform: translateX(4px); 
+}
 
 @media (max-width: 900px) {
   .section {
