@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import styles from './Nav.module.css';
+import LogoSync3 from './icons/LogoSyn3';
 
 const links = [
   { label: 'Work', href: '#work' },
@@ -28,21 +29,16 @@ export default function Nav() {
       <nav className={`${styles.nav} ${scrolled ? styles.scrolled : ''}`}>
         {/* Logo wrapper targeting the updated flex layout container */}
         <a href="#" className={styles.logo}>
-          <Image 
-            src="/logo.png" 
-            alt="Syntac Logo" 
-            width={200}
-            height={50}
-            priority 
-            style={{ height: '100%', width: 'auto', objectFit: 'contain' }} 
-          />
+          <LogoSync3 className="w-auto h-4 md:h-5" />
         </a>
 
         {/* Desktop links */}
         <ul className={styles.links}>
           {links.map((l) => (
             <li key={l.href}>
-              <a href={l.href} className={styles.link}>{l.label}</a>
+              <a href={l.href} className={styles.link}>
+                {l.label}
+              </a>
             </li>
           ))}
         </ul>
@@ -53,9 +49,15 @@ export default function Nav() {
           onClick={() => setMenuOpen((o) => !o)}
           aria-label="Toggle menu"
         >
-          <span className={`${styles.bar} ${menuOpen ? styles.barOpen1 : ''}`} />
-          <span className={`${styles.bar} ${menuOpen ? styles.barOpen2 : ''}`} />
-          <span className={`${styles.bar} ${menuOpen ? styles.barOpen3 : ''}`} />
+          <span
+            className={`${styles.bar} ${menuOpen ? styles.barOpen1 : ''}`}
+          />
+          <span
+            className={`${styles.bar} ${menuOpen ? styles.barOpen2 : ''}`}
+          />
+          <span
+            className={`${styles.bar} ${menuOpen ? styles.barOpen3 : ''}`}
+          />
         </button>
       </nav>
 
@@ -64,7 +66,11 @@ export default function Nav() {
         <ul className={styles.drawerLinks}>
           {links.map((l) => (
             <li key={l.href}>
-              <a href={l.href} className={styles.drawerLink} onClick={closeMenu}>
+              <a
+                href={l.href}
+                className={styles.drawerLink}
+                onClick={closeMenu}
+              >
                 {l.label}
               </a>
             </li>
