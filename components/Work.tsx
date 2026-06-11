@@ -113,9 +113,18 @@ const filters = ['Web', 'Logo', 'Poster', 'Flyer', 'Packaging'];
 
 export default function Work() {
   const [active, setActive] = useState('Web');
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
   const filtered = projects.filter(
     (p) => p.type.toLowerCase() === active.toLowerCase(),
   );
+
+  // Prevents parent anchor tags from executing if image preview is targeted
+  const handleImageClick = (e: React.MouseEvent, imgSrc: string) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setSelectedImage(imgSrc);
+  };
 
   return (
     <section className={styles.section} id="work">
@@ -156,14 +165,17 @@ export default function Work() {
                 <div>
                   <h3 className={styles.projectName}>
                     {p.name}
-                    {/* Country rendered next to project name */}
                     <span className={styles.inlineCountry}>{p.country}</span>
                   </h3>
                   <p className={styles.projectDesc}>{p.desc}</p>
                 </div>
               </div>
 
-              <div className={styles.imagePreview}>
+              {/* Click handler integrated here */}
+              <div 
+                className={styles.imagePreview}
+                onClick={(e) => handleImageClick(e, p.image)}
+              >
                 <Image
                   src={p.image}
                   alt={p.name}
@@ -182,6 +194,26 @@ export default function Work() {
           );
         })}
       </div>
+
+      {/* Pop-up Modal UI Layout */}
+      {selectedImage && (
+        <div className={styles.modalOverlay} onClick={() => setSelectedImage(null)}>
+          <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+            <button className={styles.closeButton} onClick={() => setSelectedImage(null)}>
+              &times;
+            </button>
+            <div className={styles.modalImageWrapper}>
+              <Image 
+                src={selectedImage} 
+                alt="Project preview display" 
+                fill
+                sizes="85vw"
+                className={styles.modalImage}
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
