@@ -21,7 +21,6 @@
   line-height: 1.05;
 }
 
-/* Filters */
 .filters {
   display: flex;
   gap: 0.5rem;
@@ -44,7 +43,6 @@
   border-color: var(--ink);
 }
 
-/* Grid Layout */
 .grid {
   border-top: 1px solid var(--border);
 }
@@ -94,6 +92,7 @@
   overflow: hidden;
   border: 1px solid var(--border);
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
 }
 
 .projectImage {
@@ -123,7 +122,76 @@
   color: var(--accent);
 }
 
-/* Responsive */
+.inlineCountry {
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: rgba(var(--accent-rgb), 0.1);
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  margin-left: 1rem;
+  vertical-align: middle;
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(10, 10, 10, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  animation: fadeIn 0.25s ease-out;
+}
+
+.modalContent {
+  position: relative;
+  width: 90%;
+  max-width: 1000px;
+  height: 75vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalImageWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.modalImage {
+  object-fit: contain !important;
+}
+
+.closeButton {
+  position: absolute;
+  top: -45px;
+  right: 10px;
+  background: none;
+  border: none;
+  color: #f5f5f7;
+  font-size: 2.5rem;
+  font-weight: 300;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 10001;
+}
+
+.closeButton:hover {
+  opacity: 0.7;
+  transform: scale(1.1);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 @media (max-width: 1024px) {
   .item {
     grid-template-columns: 1fr 1fr;
@@ -147,15 +215,4 @@
     max-width: 100%;
     height: 200px;
   }
-}
-.inlineCountry {
-  font-size: 0.7rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--accent);
-  background: rgba(var(--accent-rgb), 0.1); /* Subtle highlight */
-  padding: 0.2rem 0.6rem;
-  border-radius: 4px;
-  margin-left: 1rem;
-  vertical-align: middle; /* Aligns with the middle of the text */
 }
