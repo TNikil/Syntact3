@@ -1,93 +1,29 @@
-# Syntac Studio — Next.js Site
+This is a Next.js project bootstrapped with create-next-app.
 
-A clean, editorial-style portfolio site built with Next.js 14 (App Router) and TypeScript.
+Getting Started
+First, run the development server:
 
-## Stack
-- **Next.js 14** — App Router
-- **TypeScript**
-- **CSS Modules** — scoped styles per component, no Tailwind needed
-- **Google Fonts** — DM Serif Display + DM Sans
-
-## Getting Started
-
-```bash
-# Install dependencies
-npm install
-
-# Run development server
 npm run dev
-```
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+Open http://localhost:3000 with your browser to see the result.
 
-Open [http://localhost:3000](http://localhost:3000)
+You can start editing the page by modifying app/page.tsx. The page auto-updates as you edit the file.
 
-## Project Structure
+This project uses next/font to automatically optimize and load Geist, a new font family for Vercel.
 
-```
-syntac/
-├── app/
-│   ├── layout.tsx        # Root layout + metadata
-│   ├── page.tsx          # Home page (composes all sections)
-│   └── globals.css       # Global resets + CSS variables
-│
-└── components/
-    ├── Nav.tsx / .css     # Fixed nav with mobile hamburger drawer
-    ├── Hero.tsx / .css    # Full-height hero, text only (add your image here)
-    ├── Marquee.tsx / .css # Infinite scrolling marquee strip
-    ├── Work.tsx / .css    # Filterable project list (editorial row style)
-    ├── Services.tsx / .css # Dark 3-column services section
-    ├── About.tsx / .css   # Stats + team grid
-    ├── CTA.tsx / .css     # Orange contact CTA
-    └── Footer.tsx / .css  # Dark footer with socials
-```
+Learn More
+To learn more about Next.js, take a look at the following resources:
 
-## Adding Your Hero Image
+Next.js Documentation - learn about Next.js features and API.
+Learn Next.js - an interactive Next.js tutorial.
+You can check out the Next.js GitHub repository - your feedback and contributions are welcome!
 
-In `components/Hero.tsx`, add your image inside `.inner`:
+Deploy on Vercel
+The easiest way to deploy your Next.js app is to use the Vercel Platform from the creators of Next.js.
 
-```tsx
-import Image from 'next/image';
-
-// Inside the .inner div, after the CTA buttons:
-<div className={styles.heroImage}>
-  <Image src="/your-image.jpg" alt="Syntac" fill style={{ objectFit: 'cover' }} />
-</div>
-```
-
-Then add the CSS in `Hero.module.css`:
-```css
-.heroImage {
-  position: absolute;
-  right: 3rem;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 45%;
-  height: 70vh;
-}
-```
-
-## Updating Content
-
-- **Projects** → `components/Work.tsx` — edit the `projects` array
-- **Services** → `components/Services.tsx` — edit the `services` array
-- **Team & Stats** → `components/About.tsx` — edit `stats` and `team` arrays
-- **Contact email** → `components/CTA.tsx`
-- **Social links** → `components/Footer.tsx`
-
-## Deployment
-
-```bash
-npm run build
-npm start
-```
-
-Deploy to [Vercel](https://vercel.com) for zero-config hosting — just push to GitHub and connect your repo.
-
-## Colors (CSS Variables in globals.css)
-
-| Variable    | Value     | Use             |
-|-------------|-----------|-----------------|
-| `--cream`   | `#F5F2ED` | Background      |
-| `--ink`     | `#1A1916` | Text / dark bg  |
-| `--accent`  | `#C94B2C` | Orange accent   |
-| `--muted`   | `#8A8680` | Secondary text  |
-| `--border`  | `#E0DDD8` | Dividers        |
+Check out our Next.js deployment documentation for more details.
