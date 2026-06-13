@@ -19,7 +19,6 @@
   border-color: var(--border);
 }
 
-
 .logo {
   z-index: 101;
   display: flex;
@@ -30,6 +29,13 @@
   transform: scale(1.6);      
   transform-origin: left center;
 }  
+
+/* Desktop links structural wrapper grouping links + switcher together */
+.navRight {
+  display: flex;
+  align-items: center;
+  gap: 3.5rem;
+}
 
 .links {
   display: flex;
@@ -47,6 +53,39 @@
 
 .link:hover {
   opacity: 1;
+}
+
+/* ==========================================
+   DESKTOP TRANSLATION SWITCHER STYLES
+   ========================================== */
+.langSwitchDesktop {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.langBtn {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  color: var(--ink);
+  opacity: 0.35;
+  cursor: pointer;
+  font-weight: 600;
+  transition: opacity 0.2s;
+}
+
+.langBtn:hover, 
+.langActive {
+  opacity: 1;
+}
+
+.langDivider {
+  font-size: 0.75rem;
+  color: var(--ink);
+  opacity: 0.2;
 }
 
 /* Hamburger */
@@ -70,15 +109,17 @@
 .barOpen2 { opacity: 0; }
 .barOpen3 { transform: translateY(-6.5px) rotate(-45deg); }
 
-/* Mobile drawer */
+/* Mobile drawer wrapper */
 .drawer {
   position: fixed;
   inset: 0;
   z-index: 99;
   background: var(--cream);
   display: flex;
+  flex-direction: column; /* Changed to arrange menu + bottom switcher cleanly */
   align-items: center;
   justify-content: center;
+  gap: 4rem;
   transform: translateX(100%);
   transition: transform 0.4s cubic-bezier(0.76, 0, 0.24, 1);
 }
@@ -108,6 +149,40 @@
   opacity: 1;
 }
 
+/* ==========================================
+   MOBILE TRANSLATION SWITCHER STYLES
+   ========================================== */
+.langSwitchMobile {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+
+.langBtnMobile {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 1.1rem;
+  letter-spacing: 0.1em;
+  color: var(--ink);
+  opacity: 0.4;
+  cursor: pointer;
+  font-weight: 600;
+  font-family: var(--sans, sans-serif);
+}
+
+.langBtnMobile:active, 
+.langActiveMobile {
+  opacity: 1;
+}
+
+.langDividerMobile {
+  font-size: 1.1rem;
+  color: var(--ink);
+  opacity: 0.2;
+}
+
 .overlay {
   position: fixed;
   inset: 0;
@@ -119,7 +194,8 @@
     padding: 1.2rem 1.5rem;
   }
 
-  .links {
+  /* Completely hides the desktop wrapper row containing menu and selector */
+  .navRight {
     display: none;
   }
 
