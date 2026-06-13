@@ -32,10 +32,10 @@ export default function RootLayout({
         {children}
         
         {/* Asynchronously loads the hidden translation core */}
-        <Script
-          src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
-          strategy="afterInteractive"
-        />
+       <Script
+  src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+  strategy="afterInteractive"
+/>
       </body>
     </html>
   );
