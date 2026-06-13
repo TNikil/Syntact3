@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Script from 'next/script'; // Added for script injection
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -19,7 +20,23 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <head>
+        {/* Forces Google's auto banner widgets to remain hidden */}
+        <style>{`
+          .skiptranslate, .goog-te-banner-frame { display: none !important; }
+          body { top: 0px !important; }
+          .goog-te-gadget { display: none !important; }
+        `}</style>
+      </head>
+      <body>
+        {children}
+        
+        {/* Asynchronously loads the hidden translation core */}
+        <Script
+          src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+          strategy="afterInteractive"
+        />
+      </body>
     </html>
   );
 }
