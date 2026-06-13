@@ -3,8 +3,9 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import styles from './Nav.module.css';
+import LogoSync3 from './icons/LogoSyn3';
 
-// Declare custom window types to bypass TypeScript checks for the script
+// Setup TypeScript bindings for the script window objects
 declare global {
   interface Window {
     google: any;
@@ -28,7 +29,7 @@ export default function Nav() {
     const onScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener('scroll', onScroll);
     
-    // Bind the initialization hook for Google Translate
+    // Core listener hook for Google engine setup
     window.googleTranslateElementInit = () => {
       new window.google.translate.TranslateElement(
         {
@@ -46,44 +47,50 @@ export default function Nav() {
 
   const closeMenu = () => setMenuOpen(false);
 
-  // Programmatically fires Google's language translation event
+  // Fires the manual drop-down dispatch event for translation
   const handleTranslate = (langCode: string) => {
+    // Fallback logic for localhost cookie synchronization
+    if (window.location.hostname === 'localhost') {
+      document.cookie = `googtrans=/en/${langCode}; path=/;`;
+    }
+
     const selectEl = document.querySelector('.goog-te-combo') as HTMLSelectElement;
     if (selectEl) {
       selectEl.value = langCode;
       selectEl.dispatchEvent(new Event('change'));
       setCurrentLang(langCode);
     }
+
+    // Refresh constraint exclusively on localized workflows
+    if (window.location.hostname === 'localhost') {
+      window.location.reload();
+    }
   };
 
   return (
     <>
-      {/* Hidden container placeholder required by Google Translate */}
+      {/* Target selector placeholder hook required by Google API */}
       <div id="google_translate_element" style={{ display: 'none' }} />
 
       <nav className={`${styles.nav} ${scrolled ? styles.scrolled : ''}`}>
+        {/* Logo wrapper using your precise inline SVG engine */}
         <a href="#" className={styles.logo}>
-          <Image 
-            src="/logo.png" 
-            alt="Syntac Logo" 
-            width={200}
-            height={50}
-            priority 
-            style={{ height: '100%', width: 'auto', objectFit: 'contain' }} 
-          />
+          <LogoSync3 className="w-auto h-4 md:h-5" />
         </a>
 
-        {/* Desktop links + Language Selector */}
+        {/* Desktop elements layout grouping links + translation toggles */}
         <div className={styles.navRight}>
           <ul className={styles.links}>
             {links.map((l) => (
               <li key={l.href}>
-                <a href={l.href} className={styles.link}>{l.label}</a>
+                <a href={l.href} className={styles.link}>
+                  {l.label}
+                </a>
               </li>
             ))}
           </ul>
           
-          {/* Desktop Switcher */}
+          {/* Main Desktop Language Controls */}
           <div className={styles.langSwitchDesktop}>
             <button 
               className={`${styles.langBtn} ${currentLang === 'en' ? styles.langActive : ''}`} 
@@ -107,25 +114,35 @@ export default function Nav() {
           onClick={() => setMenuOpen((o) => !o)}
           aria-label="Toggle menu"
         >
-          <span className={`${styles.bar} ${menuOpen ? styles.barOpen1 : ''}`} />
-          <span className={`${styles.bar} ${menuOpen ? styles.barOpen2 : ''}`} />
-          <span className={`${styles.bar} ${menuOpen ? styles.barOpen3 : ''}`} />
+          <span
+            className={`${styles.bar} ${menuOpen ? styles.barOpen1 : ''}`}
+          />
+          <span
+            className={`${styles.bar} ${menuOpen ? styles.barOpen2 : ''}`}
+          />
+          <span
+            className={`${styles.bar} ${menuOpen ? styles.barOpen3 : ''}`}
+          />
         </button>
       </nav>
 
-      {/* Mobile drawer */}
+      {/* Mobile drawer layout config */}
       <div className={`${styles.drawer} ${menuOpen ? styles.drawerOpen : ''}`}>
         <ul className={styles.drawerLinks}>
           {links.map((l) => (
             <li key={l.href}>
-              <a href={l.href} className={styles.drawerLink} onClick={closeMenu}>
+              <a
+                href={l.href}
+                className={styles.drawerLink}
+                onClick={closeMenu}
+              >
                 {l.label}
               </a>
             </li>
           ))}
         </ul>
 
-        {/* Mobile Switcher at bottom of drawer */}
+        {/* Bottom anchor language toggle inside mobile display */}
         <div className={styles.langSwitchMobile}>
           <button 
             className={`${styles.langBtnMobile} ${currentLang === 'en' ? styles.langActiveMobile : ''}`} 
