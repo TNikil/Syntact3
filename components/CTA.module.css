@@ -1,6 +1,6 @@
 .section {
   background: var(--accent);
-  padding: 10rem 4rem;
+  padding: 10rem 4rem; 
 }
 
 .inner {
@@ -20,10 +20,53 @@
   color: var(--cream);
 }
 
+/* Right-hand side structural container */
+.rightColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+  width: 100%;
+  max-width: 420px; /* Anchors the block so it doesn't over-stretch */
+  flex-shrink: 0;
+}
+
+/* Info Deck Layout */
+.infoDeck {
+  display: flex;
+  flex-direction: column;
+}
+
+.infoGroup {
+  padding: 1.25rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.infoGroup:last-child {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.infoLabel {
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+  display: block;
+  margin-bottom: 0.4rem;
+}
+
+.infoValue {
+  font-family: var(--sans);
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--cream);
+  margin: 0;
+}
+
 .actions {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start; /* Aligned left inside the right block */
   flex-shrink: 0;
 }
 
@@ -52,7 +95,6 @@
   transition: transform 0.3s ease;
 }
 
-
 .btnWhite:hover {
   transform: translateY(-2px);
   box-shadow: 0 10px 30px rgba(245, 242, 237, 0.25), 
@@ -72,9 +114,14 @@
   .inner {
     flex-direction: column;
     align-items: flex-start;
-    gap: 3rem;
+    gap: 3.5rem;
   }
   
+  .rightColumn {
+    max-width: 100%; /* Spans full width smoothly on tablets/mobile */
+    gap: 2.5rem;
+  }
+
   .btnWhite {
     padding: 1.1rem 2.6rem;
     font-size: 0.8rem;
