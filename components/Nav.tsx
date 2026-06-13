@@ -49,19 +49,25 @@ export default function Nav() {
 
   // Fires the manual drop-down dispatch event for translation
   const handleTranslate = (langCode: string) => {
-    // Fallback logic for localhost cookie synchronization
+    // 1. Production domain handling vs local host fallback rules
     if (window.location.hostname === 'localhost') {
       document.cookie = `googtrans=/en/${langCode}; path=/;`;
+    } else {
+      document.cookie = `googtrans=/en/${langCode}; path=/; domain=.syntact3.com;`;
+      document.cookie = `googtrans=/en/${langCode}; path=/;`; // Safe redundant fallback
     }
 
+    // 2. Automated component change target check
     const selectEl = document.querySelector('.goog-te-combo') as HTMLSelectElement;
     if (selectEl) {
       selectEl.value = langCode;
       selectEl.dispatchEvent(new Event('change'));
       setCurrentLang(langCode);
+    } else {
+      // 3. Fallback reload to parse cookies if runtime script evaluation is delayed
+      window.location.reload();
     }
 
-    // Refresh constraint exclusively on localized workflows
     if (window.location.hostname === 'localhost') {
       window.location.reload();
     }
