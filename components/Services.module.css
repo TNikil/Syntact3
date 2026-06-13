@@ -42,10 +42,11 @@
   padding-left: 2.5rem;
 }
 
+/* 1. Brightened up from 0.25 to 0.60 opacity so the eyes track the grid structure easily */
 .num {
   font-size: 0.72rem;
   letter-spacing: 0.18em;
-  color: rgba(255, 255, 255, 0.25);
+  color: rgba(255, 255, 255, 0.6);
   margin-bottom: 1.5rem;
 }
 
@@ -58,23 +59,34 @@
   color: var(--cream);
 }
 
+/* 2. Increased size slightly (0.85rem -> 0.92rem) and opacity (0.45 -> 0.65) for crisp body readability */
 .cardDesc {
-  font-size: 0.85rem;
-  line-height: 1.8;
-  color: rgba(255, 255, 255, 0.45);
-  margin-bottom: 1.5rem;
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.65);
+  margin-bottom: 1.8rem;
 }
 
 .list {
   border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
+/* 3. Upgraded sub-services size/weight and added a silky transition for user interaction */
 .listItem {
-  font-size: 0.78rem;
-  color: rgba(255, 255, 255, 0.35);
-  padding: 0.55rem 0;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.4);
+  padding: 0.7rem 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   line-height: 1.5;
+  transition: color 0.25s ease, padding-left 0.25s ease;
+  cursor: default;
+}
+
+/* 4. Lights up to full cream brightness and nudges slightly right when hovered */
+.listItem:hover {
+  color: var(--cream);
+  padding-left: 4px;
 }
 
 @media (max-width: 900px) {
