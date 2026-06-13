@@ -25,12 +25,8 @@
   align-items: center;
   height: 2.5rem; 
 }
-.logo img {
-  transform: scale(1.6);      
-  transform-origin: left center;
-}  
 
-/* Desktop links structural wrapper grouping links + switcher together */
+/* Structural wrapper grouping the links + language switches together */
 .navRight {
   display: flex;
   align-items: center;
@@ -109,14 +105,14 @@
 .barOpen2 { opacity: 0; }
 .barOpen3 { transform: translateY(-6.5px) rotate(-45deg); }
 
-/* Mobile drawer wrapper */
+/* Mobile drawer */
 .drawer {
   position: fixed;
   inset: 0;
   z-index: 99;
   background: var(--cream);
   display: flex;
-  flex-direction: column; /* Changed to arrange menu + bottom switcher cleanly */
+  flex-direction: column; /* Organizes links on top, switcher on bottom */
   align-items: center;
   justify-content: center;
   gap: 4rem;
@@ -194,7 +190,7 @@
     padding: 1.2rem 1.5rem;
   }
 
-  /* Completely hides the desktop wrapper row containing menu and selector */
+  /* Hides the desktop navigation container on small devices */
   .navRight {
     display: none;
   }
