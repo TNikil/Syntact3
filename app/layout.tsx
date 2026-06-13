@@ -3,7 +3,7 @@ import Script from 'next/script'; // Added for script injection
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Syntac Studio — Web Dev & Graphic Design',
+  title: 'Syntact³ Studio',
   description:
     'Syntac is a boutique creative studio crafting bold digital experiences — from pixel-perfect designs to powerful web builds.',
   openGraph: {
