@@ -47,9 +47,10 @@
   border-top: 1px solid var(--border);
 }
 
+/* Adjusted columns slightly (1.5fr at the end instead of 0.5fr) to ensure the text link has perfect space */
 .item {
   display: grid;
-  grid-template-columns: 2fr 1fr 0.5fr;
+  grid-template-columns: 2fr 1fr 1.5fr;
   align-items: center;
   gap: 3rem;
   padding: 2.5rem 0;
@@ -109,18 +110,61 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 1.5rem;
+  gap: 2.5rem;
 }
 
-.arrow {
-  font-size: 1.2rem;
-  transition: 0.25s;
+/* ==========================================================================
+   NEW TEXT LINK & HOVER INTERACTION STYLES
+   ========================================================================== */
+.ctaText {
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  position: relative;
+  padding-bottom: 2px;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+  white-space: nowrap;
 }
 
-.item:hover .arrow {
-  transform: translateX(6px);
+/* Sleek expanding line under the text */
+.ctaText::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 1px;
+  bottom: 0;
+  left: 0;
+  background-color: currentColor;
+  transform-origin: bottom right;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ctaArrow {
+  font-size: 1rem;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Triggers when the full project row wrapper is hovered */
+.item:hover .ctaText {
+  opacity: 1;
   color: var(--accent);
 }
+
+.item:hover .ctaText::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+.item:hover .ctaArrow {
+  transform: translateX(4px);
+}
+/* ========================================================================== */
 
 .inlineCountry {
   font-size: 0.7rem;
@@ -192,12 +236,22 @@
   to { opacity: 1; }
 }
 
+/* ==========================================================================
+   UPDATED RESPONSIVE BREAKPOINTS
+   ========================================================================== */
 @media (max-width: 1024px) {
   .item {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
   }
+  
+  /* Restructure instead of completely hiding on tablet */
   .itemRight {
-    display: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 0.75rem;
   }
 }
 
@@ -205,14 +259,39 @@
   .section {
     padding: 5rem 1.5rem;
   }
+  
   .item {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 1rem;
+    gap: 1.5rem;
   }
+  
   .imagePreview {
     max-width: 100%;
     height: 200px;
+    order: 2; /* Positions the thumbnail image cleanly below the text block */
+  }
+  
+  /* Formats the tags and CTA link horizontally beneath the image */
+  .itemRight {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    gap: 1.5rem;
+    order: 3;
+    margin-top: 0.5rem;
+  }
+  
+  /* Keeps the interactive indicator permanently highlighted since touch interfaces lack hover states */
+  .ctaText {
+    opacity: 1;
+    color: var(--accent);
+  }
+  
+  .ctaText::after {
+    transform: scaleX(1);
   }
 }
