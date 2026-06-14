@@ -1,15 +1,77 @@
 .hero {
   min-height: 100vh;
-  display: flex;
-  align-items: flex-end;
-  padding: 0 3rem 6rem;
-  padding-top: 8rem;
+  display: grid;
+  align-items: center; /* Vertically centers the content and the 3D asset */
+  padding: 8rem 3rem 6rem; /* Cleaned up paddings into a single shorthand */
   background: var(--cream);
   position: relative;
+  overflow: hidden;
 }
 
 .inner {
-  max-width: 780px;
+  width: 100%;
+  max-width: 1440px; /* Expanded to allow space for the 3D asset on widescreen */
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+/* --- Layout Split for Desktop --- */
+@media (min-width: 769px) {
+  .inner {
+    /* Shifts grid split to balance out the typography block and asset container */
+    grid-template-columns: 1.1fr 0.9fr; 
+    gap: 4rem;
+    position: relative;
+  }
+
+  /* Absolute positions the container on desktop to scale dynamically with the text height */
+  .objectSide {
+    position: absolute;
+    right: -2rem; /* Pulls the asset slightly outward into the canvas margin */
+    top: -3rem; /* Shifted from 0 to nudge the asset upward next to the main headlines */
+    bottom: 0;
+    width: 45%; /* Forces the asset block to track the right half of the screen */
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+/* --- Mobile Setup Wrapper --- */
+@media (max-width: 768px) {
+  .objectSide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+}
+
+/* --- 3D Object Side Wrapper --- */
+.objectSide {
+  pointer-events: none; /* Disables right-clicks and selection highlighting */
+  user-select: none;
+  -webkit-user-select: none;
+  animation: fadeUp 1.2s 0.4s cubic-bezier(0.16, 1, 0.3, 1) both; /* Smooth unique enter animation */
+}
+
+.renderAsset {
+  width: 100%;
+  max-width: 780px; /* Massive upper limit bounds to match the lines on the left */
+  height: 95%; /* Forces it to scale vertically matching your full typography bracket */
+  object-fit: contain;
+  /* Soft atmospheric glow matching your design's orange accent color */
+  filter: drop-shadow(0 35px 80px rgba(211, 78, 36, 0.16)); 
+}
+
+/* --- Typography & Elements (Preserved precisely) --- */
+.contentSide {
+  display: flex;
+  flex-direction: column;
 }
 
 .tag {
@@ -93,12 +155,15 @@
   to   { opacity: 1; transform: translateY(0); }
 }
 
+/* --- Mobile Responsiveness --- */
 @media (max-width: 768px) {
   .hero {
-    padding: 0 1.5rem 4rem;
-    padding-top: 7rem;
-    min-height: 90vh;
-    align-items: flex-end;
+    padding: 7rem 1.5rem 4rem;
+    min-height: auto; /* Fallback so content fits naturally without clipping */
+  }
+
+  .inner {
+    gap: 4rem; /* Spaces the object away from the CTA buttons */
   }
 
   .desc {
@@ -107,5 +172,9 @@
 
   .cta {
     gap: 1rem;
+  }
+  
+  .renderAsset {
+    max-width: 320px; /* Restricts scale on mobile phones so it remains sharp */
   }
 }
