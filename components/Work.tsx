@@ -188,7 +188,11 @@ export default function Work() {
               <div className={styles.itemRight}>
                 <span className={styles.type}>{p.type}</span>
                 <span className={styles.year}>{p.year}</span>
-                {p.link && <span className={styles.arrow}>→</span>}
+                {p.link && (
+                  <span className={styles.ctaText}>
+                    View Site <span className={styles.ctaArrow}>→</span>
+                  </span>
+                )}
               </div>
             </Wrapper>
           );
