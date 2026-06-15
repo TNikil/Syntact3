@@ -4,7 +4,7 @@
 }
 
 .header {
-  margin-bottom: 3rem;
+  margin-bottom: 4rem;
 }
 
 .tag {
@@ -17,24 +17,31 @@
 
 .headline {
   font-family: var(--serif);
-  font-size: clamp(2.4rem, 5vw, 4.5rem);
+  font-size: clamp(2.6rem, 5vw, 4.5rem);
   line-height: 1.05;
+  letter-spacing: -0.02em;
 }
 
 .filters {
   display: flex;
-  gap: 0.5rem;
-  margin-bottom: 3rem;
+  gap: 0.75rem;
+  margin-bottom: 4rem;
   flex-wrap: wrap;
 }
 
 .filterBtn {
-  padding: 0.45rem 1.1rem;
-  font-size: 0.7rem;
+  padding: 0.55rem 1.3rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
   border: 1px solid var(--border);
   background: transparent;
   cursor: pointer;
-  transition: 0.2s;
+  transition: all 0.25s ease;
+}
+
+.filterBtn:hover {
+  border-color: var(--ink);
 }
 
 .filterActive {
@@ -47,62 +54,73 @@
   border-top: 1px solid var(--border);
 }
 
-/* Adjusted columns slightly (1.5fr at the end instead of 0.5fr) to ensure the text link has perfect space */
 .item {
   display: grid;
-  grid-template-columns: 2fr 1fr 1.5fr;
+  grid-template-columns: 2fr 1fr 1.3fr;
   align-items: center;
   gap: 3rem;
-  padding: 2.5rem 0;
+  padding: 3rem 0;
   border-bottom: 1px solid var(--border);
   text-decoration: none;
   color: inherit;
+  transition: background-color 0.3s ease;
 }
 
 .itemLeft {
   display: flex;
   align-items: flex-start;
-  gap: 2rem;
+  gap: 2.5rem;
 }
 
 .num {
   font-family: var(--serif);
+  font-size: 1.1rem;
   color: var(--muted);
-  opacity: 0.5;
-  min-width: 2rem;
+  opacity: 0.4;
+  min-width: 2.5rem;
+  padding-top: 0.4rem;
 }
 
 .projectName {
   font-family: var(--serif);
-  font-size: 2rem;
-  margin-bottom: 0.4rem;
+  font-size: clamp(1.8rem, 2.5vw, 2.4rem);
+  letter-spacing: -0.01em;
+  margin-bottom: 0.5rem;
 }
 
 .projectDesc {
-  font-size: 0.83rem;
+  font-size: 0.88rem;
   color: var(--muted);
-  line-height: 1.6;
-  max-width: 420px;
+  line-height: 1.7;
+  max-width: 440px;
 }
 
 .imagePreview {
   width: 100%;
-  max-width: 240px;
-  height: 120px;
-  border-radius: 8px;
+  max-width: 260px;
+  height: 140px;
+  border-radius: 4px;
   overflow: hidden;
-  border: 1px solid var(--border);
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  border: none;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .projectImage {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .item:hover .imagePreview {
+  transform: scale(1.03) translateY(-2px);
+}
+
+.item:hover .projectImage {
   transform: scale(1.05);
 }
 
@@ -110,28 +128,24 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 2.5rem;
+  gap: 3rem;
 }
 
-/* ==========================================================================
-   NEW TEXT LINK & HOVER INTERACTION STYLES
-   ========================================================================== */
 .ctaText {
-  font-size: 0.8rem;
-  font-weight: 500;
+  font-size: 0.75rem;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.12em;
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.5rem;
   position: relative;
-  padding-bottom: 2px;
-  opacity: 0.7;
-  transition: opacity 0.3s ease;
+  padding-bottom: 4px;
+  opacity: 0.6;
+  transition: opacity 0.3s ease, color 0.3s ease;
   white-space: nowrap;
 }
 
-/* Sleek expanding line under the text */
 .ctaText::after {
   content: '';
   position: absolute;
@@ -142,15 +156,14 @@
   left: 0;
   background-color: currentColor;
   transform-origin: bottom right;
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .ctaArrow {
-  font-size: 1rem;
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  font-size: 0.9rem;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Triggers when the full project row wrapper is hovered */
 .item:hover .ctaText {
   opacity: 1;
   color: var(--accent);
@@ -162,20 +175,20 @@
 }
 
 .item:hover .ctaArrow {
-  transform: translateX(4px);
+  transform: translateX(5px);
 }
-/* ========================================================================== */
 
 .inlineCountry {
-  font-size: 0.7rem;
-  letter-spacing: 0.1em;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--accent);
-  background: rgba(var(--accent-rgb), 0.1);
-  padding: 0.2rem 0.6rem;
-  border-radius: 4px;
+  background: rgba(var(--accent-rgb), 0.08);
+  padding: 0.25rem 0.65rem;
+  border-radius: 2px;
   margin-left: 1rem;
   vertical-align: middle;
+  display: inline-block;
 }
 
 .modalOverlay {
@@ -184,18 +197,18 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(10, 10, 10, 0.9);
+  background-color: rgba(10, 10, 10, 0.94);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 9999;
-  animation: fadeIn 0.25s ease-out;
+  animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .modalContent {
   position: relative;
   width: 90%;
-  max-width: 1000px;
+  max-width: 1100px;
   height: 75vh;
   display: flex;
   justify-content: center;
@@ -214,44 +227,40 @@
 
 .closeButton {
   position: absolute;
-  top: -45px;
-  right: 10px;
+  top: -50px;
+  right: 5px;
   background: none;
   border: none;
   color: #f5f5f7;
-  font-size: 2.5rem;
-  font-weight: 300;
+  font-size: 2.2rem;
+  font-weight: 200;
   cursor: pointer;
   transition: opacity 0.2s ease, transform 0.2s ease;
   z-index: 10001;
 }
 
 .closeButton:hover {
-  opacity: 0.7;
-  transform: scale(1.1);
+  opacity: 0.6;
+  transform: scale(1.05);
 }
 
 @keyframes fadeIn {
   from { opacity: 0; }
-  to { opacity: 1; }
+  to   { opacity: 1; }
 }
 
-/* ==========================================================================
-   UPDATED RESPONSIVE BREAKPOINTS
-   ========================================================================== */
 @media (max-width: 1024px) {
   .item {
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 1.8fr 1.2fr;
     gap: 2rem;
+    padding: 2.5rem 0;
   }
   
-  /* Restructure instead of completely hiding on tablet */
   .itemRight {
-    display: flex;
     flex-direction: column;
     align-items: flex-end;
     justify-content: center;
-    gap: 0.75rem;
+    gap: 1rem;
   }
 }
 
@@ -260,32 +269,43 @@
     padding: 5rem 1.5rem;
   }
   
+  .header {
+    margin-bottom: 3rem;
+  }
+
   .item {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 1.5rem;
+    padding: 2rem 0;
+  }
+
+  .itemLeft {
+    gap: 1.5rem;
+  }
+
+  .num {
+    font-size: 0.95rem;
+    min-width: 1.5rem;
   }
   
   .imagePreview {
     max-width: 100%;
-    height: 200px;
-    order: 2; /* Positions the thumbnail image cleanly below the text block */
+    height: 180px;
+    order: 2;
   }
   
-  /* Formats the tags and CTA link horizontally beneath the image */
   .itemRight {
-    display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between;
     width: 100%;
     gap: 1.5rem;
     order: 3;
-    margin-top: 0.5rem;
+    margin-top: 0.25rem;
   }
   
-  /* Keeps the interactive indicator permanently highlighted since touch interfaces lack hover states */
   .ctaText {
     opacity: 1;
     color: var(--accent);
