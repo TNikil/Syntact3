@@ -136,7 +136,7 @@ const projects = [
     year: '2023',
     country: 'USA',
     desc: 'Custom packaging for US based spices company.',
-    image: '/images/crevox.jpg',
+    image: '/images/cervox.jpg',
   },
   {
     name: 'Verginia honey',
