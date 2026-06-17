@@ -70,7 +70,7 @@ const projects = [
     year: '2023',
     country: 'Sri Lanka',
     desc: 'Spices packaging company',
-    image: '/images/crevox_logo.jpg',
+    image: '/images/cervox_logo.jpg',
   },
   {
     name: 'Mob BBQ',
