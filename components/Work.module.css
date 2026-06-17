@@ -84,7 +84,7 @@
 .projectName {
   font-family: var(--serif);
   font-size: clamp(1.8rem, 2.5vw, 2.4rem);
-  letter-spacing: -0.01em;
+  letter-spacing: 0.1em;
   margin-bottom: 0.5rem;
 }
 
@@ -142,7 +142,9 @@
   position: relative;
   padding-bottom: 4px;
   opacity: 0.6;
-  transition: opacity 0.3s ease, color 0.3s ease;
+  transition:
+    opacity 0.3s ease,
+    color 0.3s ease;
   white-space: nowrap;
 }
 
@@ -180,7 +182,7 @@
 
 .inlineCountry {
   font-size: 0.68rem;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--accent);
   background: rgba(var(--accent-rgb), 0.08);
@@ -235,7 +237,9 @@
   font-size: 2.2rem;
   font-weight: 200;
   cursor: pointer;
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
   z-index: 10001;
 }
 
@@ -245,8 +249,12 @@
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @media (max-width: 1024px) {
@@ -255,7 +263,7 @@
     gap: 2rem;
     padding: 2.5rem 0;
   }
-  
+
   .itemRight {
     flex-direction: column;
     align-items: flex-end;
@@ -268,7 +276,7 @@
   .section {
     padding: 5rem 1.5rem;
   }
-  
+
   .header {
     margin-bottom: 3rem;
   }
@@ -289,13 +297,13 @@
     font-size: 0.95rem;
     min-width: 1.5rem;
   }
-  
+
   .imagePreview {
     max-width: 100%;
     height: 180px;
     order: 2;
   }
-  
+
   .itemRight {
     flex-direction: row;
     align-items: center;
@@ -305,12 +313,12 @@
     order: 3;
     margin-top: 0.25rem;
   }
-  
+
   .ctaText {
     opacity: 1;
     color: var(--accent);
   }
-  
+
   .ctaText::after {
     transform: scaleX(1);
   }

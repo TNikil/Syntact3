@@ -6,6 +6,24 @@ import styles from './Work.module.css';
 
 const projects = [
   {
+    name: 'Danpest',
+    type: 'Web',
+    year: '2018',
+    country: 'Sri Lanka',
+    desc: 'A team of Pest Control and Hygiene industry experts at your service',
+    link: 'https://www.danpest.com/',
+    image: '/images/danpest.jpg',
+  },
+  {
+    name: 'Rian Rest Apartment',
+    type: 'Web',
+    year: '2023',
+    country: 'Sri Lanka',
+    desc: 'Airbnb-style listing site with booking flow. An SLTDA approved sanctuary designed for those who seek tranquility, comfort, and effortless convenience.',
+    link: 'https://rianrest.com',
+    image: '/images/rianrest.jpg',
+  },
+  {
     name: 'Grace Flower and More',
     type: 'Web',
     year: '2024',
@@ -13,15 +31,6 @@ const projects = [
     desc: 'Ecommerce florist website to deal across UAE.',
     link: 'https://grace-flower-boutique-2.vercel.app/bouquet/5c350175-6be2-44d4-8264-e969cbe8ff02',
     image: '/images/grace.jpg',
-  },
-  {
-    name: 'Danpest',
-    type: 'Web',
-    year: '2024',
-    country: 'Sri Lanka',
-    desc: 'Professional pest control solutions website.',
-    link: 'https://www.danpest.com/',
-    image: '/images/danpest.jpg',
   },
   {
     name: 'Music Party',
@@ -56,6 +65,46 @@ const projects = [
     image: '/images/lotus-beverage.jpg',
   },
   {
+    name: 'Crevox',
+    type: 'Logo',
+    year: '2023',
+    country: 'Sri Lanka',
+    desc: 'Spices packaging company',
+    image: '/images/crevox_logo.jpg',
+  },
+  {
+    name: 'Mob BBQ',
+    type: 'Logo',
+    year: '2019',
+    country: 'USA',
+    desc: 'BBQ Grill company',
+    image: '/images/bbq_logo.jpg',
+  },
+  {
+    name: 'Thaya floral and gourmet',
+    type: 'Logo',
+    year: '2017',
+    country: 'UAE',
+    desc: 'Flower, events and landscaping company',
+    image: '/images/thaya_logo.jpg',
+  },
+  {
+    name: 'Dan pest',
+    type: 'Logo',
+    year: '2018',
+    country: 'Sri Lanka',
+    desc: 'Logo for a eco friendly pest control business',
+    image: '/images/danpest_logo.jpg',
+  },
+  {
+    name: 'Rianrest',
+    type: 'Logo',
+    year: '2025',
+    country: 'Sri Lanka',
+    desc: 'Sun and beaches represnt this logo',
+    image: '/images/rianrest_logo.jpg',
+  },
+  {
     name: 'Wedding Invitation',
     type: 'Flyer',
     year: '2023',
@@ -63,15 +112,7 @@ const projects = [
     desc: 'Black and White Retro Save the Date  Wedding Invitation Flyer.',
     image: '/images/wedding-invitation.jpg',
   },
-  {
-    name: 'Rian Rest Apartment',
-    type: 'Web',
-    year: '2023',
-    country: 'Sri Lanka',
-    desc: 'Airbnb-style listing site with booking flow.',
-    link: 'https://rianrest.com',
-    image: '/images/rianrest.jpg',
-  },
+
   {
     name: 'Hatti',
     type: 'Logo',
@@ -90,12 +131,19 @@ const projects = [
     image: '/images/blossom.jpg',
   },
   {
+    name: 'Crevox Spices',
+    type: 'Packaging',
+    year: '2023',
+    country: 'USA',
+    desc: 'Custom packaging for US based spices company.',
+    image: '/images/crevox.jpg',
+  },
+  {
     name: 'Verginia honey',
     type: 'Packaging',
     year: '2017',
     country: 'USA',
     desc: 'Custom packaging for US based Honey company.',
-    link: 'https://rianrest.com',
     image: '/images/verginia.jpg',
   },
   {
@@ -104,7 +152,6 @@ const projects = [
     year: '2019',
     country: 'Qatar',
     desc: 'Market product for eco items',
-    link: 'https://rianrest.com',
     image: '/images/ecosouq.jpg',
   },
 ];
@@ -172,7 +219,7 @@ export default function Work() {
               </div>
 
               {/* Click handler integrated here */}
-              <div 
+              <div
                 className={styles.imagePreview}
                 onClick={(e) => handleImageClick(e, p.image)}
               >
@@ -201,15 +248,24 @@ export default function Work() {
 
       {/* Pop-up Modal UI Layout */}
       {selectedImage && (
-        <div className={styles.modalOverlay} onClick={() => setSelectedImage(null)}>
-          <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
-            <button className={styles.closeButton} onClick={() => setSelectedImage(null)}>
+        <div
+          className={styles.modalOverlay}
+          onClick={() => setSelectedImage(null)}
+        >
+          <div
+            className={styles.modalContent}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              className={styles.closeButton}
+              onClick={() => setSelectedImage(null)}
+            >
               &times;
             </button>
             <div className={styles.modalImageWrapper}>
-              <Image 
-                src={selectedImage} 
-                alt="Project preview display" 
+              <Image
+                src={selectedImage}
+                alt="Project preview display"
                 fill
                 sizes="85vw"
                 className={styles.modalImage}
