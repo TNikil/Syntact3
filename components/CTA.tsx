@@ -23,7 +23,7 @@ export default function CTA() {
 
           <div className={styles.actions}>
             <a 
-              href="https://wa.me/971545607443?text=Hi%20there!%20I%27d%20like%20to%20discuss%20a%20project." 
+              href="https://wa.me/94711368724?text=Hi%20there!%20I%27d%20like%20to%20discuss%20a%20project." 
               className={styles.btnWhite}
               target="_blank" 
               rel="noopener noreferrer"
