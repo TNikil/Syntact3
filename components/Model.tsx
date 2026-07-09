@@ -90,7 +90,7 @@ export default function Model({
   const { actions, names } = useAnimations(animations, groupRef);
 
   // ============================================================
-  // ✅ VIDEO TEXTURE WITH SILENT ERROR HANDLING
+  // ✅ VIDEO TEXTURE WITH SILENT HANDLING
   // ============================================================
   const createVideoTexture = () => {
     if (typeof window === 'undefined') return null;

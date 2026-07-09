@@ -34,7 +34,7 @@ export default function HeroNew() {
             variants={fadeUpVariants}
             transition={{ delay: 0.1 }}
           >
-            WE DESIGN
+            WE DESIGN.
             <br />
             WE BUILD.
             <br />
