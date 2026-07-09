@@ -1,17 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap');
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
 :root {
-  --cream: #F5F2ED;
-  --ink: #1A1916;
-  --muted: #8A8680;
-  --accent: #C94B2C;
-  --border: #E0DDD8;
+  --cream: #f8f8f7;
+  --ink: #1a1916;
+  --muted: #8a8680;
+  --accent: #c94b2c;
+  --border: #e0ddd8;
   --serif: 'DM Serif Display', serif;
   --sans: 'DM Sans', sans-serif;
 }

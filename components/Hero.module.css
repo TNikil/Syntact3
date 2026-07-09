@@ -1,16 +1,40 @@
 .hero {
   min-height: 100vh;
   display: grid;
-  align-items: center; /* Vertically centers the content and the 3D asset */
-  padding: 8rem 3rem 6rem; /* Cleaned up paddings into a single shorthand */
-  background: var(--cream);
+  place-items: center;
   position: relative;
   overflow: hidden;
+  padding: 8rem 3rem 6rem;
 }
 
-.inner {
+/* --- Full-screen background video --- */
+.bgVideo {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  max-width: 1440px; /* Expanded to allow space for the 3D asset on widescreen */
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+/* --- Dark overlay for text readability --- */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+/* --- Content container --- */
+.inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1440px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr;
@@ -18,92 +42,74 @@
   align-items: center;
 }
 
-/* --- Layout Split for Desktop --- */
+/* --- Desktop layout --- */
 @media (min-width: 769px) {
   .inner {
-    /* Shifts grid split to balance out the typography block and asset container */
-    grid-template-columns: 1.1fr 0.9fr; 
+    grid-template-columns: 1.1fr 0.9fr;
     gap: 4rem;
-    position: relative;
-  }
-
-  /* Absolute positions the container on desktop to scale dynamically with the text height */
-  .objectSide {
-    position: absolute;
-    right: -2rem; /* Pulls the asset slightly outward into the canvas margin */
-    top: -3rem; /* Shifted from 0 to nudge the asset upward next to the main headlines */
-    bottom: 0;
-    width: 45%; /* Forces the asset block to track the right half of the screen */
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
 }
 
-/* --- Mobile Setup Wrapper --- */
+/* --- Mobile adjustments --- */
 @media (max-width: 768px) {
-  .objectSide {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
+  .hero {
+    padding: 7rem 1.5rem 4rem;
+    min-height: auto;
+  }
+
+  .inner {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .desc {
+    font-size: 0.95rem;
+  }
+
+  .cta {
+    gap: 1rem;
   }
 }
 
-/* --- 3D Object Side Wrapper --- */
-.objectSide {
-  pointer-events: none; /* Disables right-clicks and selection highlighting */
-  user-select: none;
-  -webkit-user-select: none;
-  animation: fadeUp 1.2s 0.4s cubic-bezier(0.16, 1, 0.3, 1) both; /* Smooth unique enter animation */
-}
-
-.renderAsset {
-  width: 100%;
-  max-width: 780px; /* Massive upper limit bounds to match the lines on the left */
-  height: 95%; /* Forces it to scale vertically matching your full typography bracket */
-  object-fit: contain;
-  /* Soft atmospheric glow matching your design's orange accent color */
-  filter: drop-shadow(0 35px 80px rgba(211, 78, 36, 0.16)); 
-}
-
-/* --- Typography & Elements (Preserved precisely) --- */
+/* --- Typography --- */
 .contentSide {
   display: flex;
   flex-direction: column;
+  color: white;
 }
 
 .tag {
   font-size: 0.72rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent, #d34e24);
   margin-bottom: 1.8rem;
   animation: fadeUp 0.8s ease both;
 }
 
 .headline {
-  font-family: var(--serif);
+  font-family: 'Bahnschrift', sans-serif;
   font-size: clamp(3.8rem, 8vw, 8rem);
-  line-height: 1.01;
-  letter-spacing: -0.03em;
+  line-height: 0.87;
+  letter-spacing: 0.01em;
   margin-bottom: 2rem;
+  color: white;
   animation: fadeUp 0.8s 0.1s ease both;
 }
 
 .accent {
   font-style: italic;
-  color: var(--accent);
+  color: var(--accent, #d34e24);
 }
 
 .desc {
-  font-size: 1.05rem;
-  line-height: 1.85;
-  color: var(--muted);
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  line-height: 0.98;
+  color: white;
   max-width: 420px;
   margin-bottom: 2.8rem;
   animation: fadeUp 0.8s 0.2s ease both;
+  font-family: 'Bahnschrift', sans-serif;
 }
 
 .cta {
@@ -115,66 +121,60 @@
 }
 
 .btnPrimary {
-  background: var(--ink);
-  color: var(--cream);
+  background: var(--accent, #d34e24);
+  color: white;
   padding: 0.9rem 2.2rem;
   font-size: 0.78rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  transition: background 0.25s;
+  transition: background 0.25s, transform 0.25s;
   display: inline-block;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  border-radius: 4px;
 }
 
 .btnPrimary:hover {
-  background: var(--accent);
+  background: #b8431e;
+  transform: scale(1.02);
 }
 
 .btnGhost {
   font-size: 0.78rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--ink);
-  opacity: 0.55;
+  color: white;
+  opacity: 0.7;
   transition: opacity 0.2s;
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  text-decoration: none;
 }
 
 .btnGhost::after {
   content: '→';
   font-size: 1rem;
+  transition: transform 0.2s;
 }
 
 .btnGhost:hover {
   opacity: 1;
 }
 
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(24px); }
-  to   { opacity: 1; transform: translateY(0); }
+.btnGhost:hover::after {
+  transform: translateX(4px);
 }
 
-/* --- Mobile Responsiveness --- */
-@media (max-width: 768px) {
-  .hero {
-    padding: 7rem 1.5rem 4rem;
-    min-height: auto; /* Fallback so content fits naturally without clipping */
+/* --- Animations --- */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
   }
-
-  .inner {
-    gap: 4rem; /* Spaces the object away from the CTA buttons */
-  }
-
-  .desc {
-    font-size: 0.95rem;
-  }
-
-  .cta {
-    gap: 1rem;
-  }
-  
-  .renderAsset {
-    max-width: 320px; /* Restricts scale on mobile phones so it remains sharp */
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
