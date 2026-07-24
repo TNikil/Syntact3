@@ -92,10 +92,10 @@ const RenderModel = ({
             <Environment preset="studio" />
           )}
 
-          {/* Camera Controls */}
+          {/* Orbit Controls */}
           {controls && (
             <OrbitControls
-              enableZoom
+              enableZoom={true}
               enablePan={false}
               autoRotate={autoRotate}
               autoRotateSpeed={1.5}
@@ -105,7 +105,7 @@ const RenderModel = ({
             />
           )}
 
-          {/* Scroll Mode */}
+          {/* Scroll Controls */}
           {scrollControls ? (
             <ScrollControls
               pages={3}
@@ -116,16 +116,12 @@ const RenderModel = ({
 
           ) : presentationControls ? (
 
-            /* Presentation Mode */
+            /* Presentation Controls */
             <PresentationControls
               global
               rotation={[0, 0, 0]}
               polar={[-Math.PI / 4, Math.PI / 4]}
               azimuth={[-Math.PI / 4, Math.PI / 4]}
-              config={{
-                mass: 2,
-                tension: 500,
-              }}
               snap
             >
               <Float
