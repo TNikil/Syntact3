@@ -56,7 +56,9 @@ export default function TestCanvas({
           alpha: alpha,
           toneMapping: toneMapping as THREE.ToneMapping,
           toneMappingExposure: exposure,
-          powerPreference: 'high-performance',
+
+          powerPreference: 'default', // Safer across virtualized or integrated graphics
+          failIfMajorPerformanceCaveat: false,
         }}
         camera={{
           position: cameraPosition,

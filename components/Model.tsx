@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { useGLTF, useAnimations } from '@react-three/drei';
 import * as THREE from 'three';
@@ -14,17 +14,23 @@ const CONFIG = {
 interface ModelProps {
   scale?: number;
   tvVideoUrl?: string;
+  tvMuted?: boolean;
+  tvLoop?: boolean;
+  enableRotation?: boolean;
+  enableParallax?: boolean;
 }
 
 export default function Model({
   scale = CONFIG.INITIAL_SCALE,
   tvVideoUrl = '/videos/sample.mp4',
+  tvMuted = true,
+  tvLoop = true,
 }: ModelProps) {
   const groupRef = useRef<THREE.Group>(null);
   const videoTextureRef = useRef<THREE.VideoTexture | null>(null);
 
-  // Load model
-  const { scene, animations } = useGLTF('/models/syntact6_model_lego-2.glb');
+  // Load model (syntact3_model)
+  const { scene, animations } = useGLTF('/models/syntact8_model.glb');
 
   // Initialize animations
   const { actions, names } = useAnimations(animations, groupRef);
@@ -42,9 +48,10 @@ export default function Model({
 
     const video = document.createElement('video');
     video.src = tvVideoUrl;
-    video.muted = true;
-    video.loop = true;
+    video.muted = tvMuted;
+    video.loop = tvLoop;
     video.playsInline = true;
+    video.crossOrigin = 'anonymous';
     video.play().catch(() => {});
 
     const texture = new THREE.VideoTexture(video);
@@ -65,7 +72,7 @@ export default function Model({
       video.src = '';
       texture.dispose();
     };
-  }, [scene, tvVideoUrl]);
+  }, [scene, tvVideoUrl, tvMuted, tvLoop]);
 
   // 3. Animation loop
   useFrame((state) => {
@@ -80,4 +87,4 @@ export default function Model({
   return <primitive ref={groupRef} object={scene} scale={scale} />;
 }
 
-useGLTF.preload('/models/syntact6_model_lego-2.glb');
+useGLTF.preload('/models/syntact8_model.glb');
