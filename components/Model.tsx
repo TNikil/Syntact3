@@ -22,6 +22,7 @@ interface ModelProps {
   preserveMaterials?: boolean;
   preserveLights?: boolean;
   environmentIntensity?: number;
+  exposure?: number;
 }
 
 export default function Model({
