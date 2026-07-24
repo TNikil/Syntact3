@@ -41,18 +41,23 @@ const RenderModel = ({
           antialias: true,
           alpha: true,
           powerPreference: 'high-performance',
-          toneMapping: 1, // ACES Filmic
+          toneMapping: 1,
           toneMappingExposure: 1.2,
         }}
         dpr={[1, 2]}
         {...canvasProps}
       >
         {/* Camera */}
-        <PerspectiveCamera makeDefault position={[0, 0, 8]} fov={30} />
+        <PerspectiveCamera
+          makeDefault
+          position={[0, 0, 8]}
+          fov={30}
+        />
 
         <Suspense fallback={null}>
           {/* Lighting */}
           <ambientLight intensity={0.5} />
+
           <spotLight
             position={[10, 10, 10]}
             angle={0.3}
@@ -60,22 +65,37 @@ const RenderModel = ({
             intensity={1}
             castShadow
           />
-          <directionalLight position={[-5, 5, 5]} intensity={0.8} />
+
+          <directionalLight
+            position={[-5, 5, 5]}
+            intensity={0.8}
+          />
+
           <directionalLight
             position={[5, -5, 0]}
             intensity={0.3}
             color="#d34e24"
           />
-          <hemisphereLight args={['#87CEEB', '#3a1c0d', 0.4]} />
-          <pointLight position={[-5, 0, 5]} intensity={0.5} color="#d34e24" />
+
+          <hemisphereLight
+            args={['#87CEEB', '#3a1c0d', 0.4]}
+          />
+
+          <pointLight
+            position={[-5, 0, 5]}
+            intensity={0.5}
+            color="#d34e24"
+          />
 
           {/* Environment */}
-          {environment && <Environment preset="studio" />}
+          {environment && (
+            <Environment preset="studio" />
+          )}
 
-          {/* Controls */}
+          {/* Camera Controls */}
           {controls && (
             <OrbitControls
-              enableZoom={true}
+              enableZoom
               enablePan={false}
               autoRotate={autoRotate}
               autoRotateSpeed={1.5}
@@ -85,28 +105,51 @@ const RenderModel = ({
             />
           )}
 
+          {/* Scroll Mode */}
           {scrollControls ? (
-            <ScrollControls pages={3} damping={0.1}>
+            <ScrollControls
+              pages={3}
+              damping={0.1}
+            >
               {children}
             </ScrollControls>
+
           ) : presentationControls ? (
+
+            /* Presentation Mode */
             <PresentationControls
               global
               rotation={[0, 0, 0]}
               polar={[-Math.PI / 4, Math.PI / 4]}
               azimuth={[-Math.PI / 4, Math.PI / 4]}
-              config={{ mass: 2, tension: 500 }}
-              snap={{ mass: 4, tension: 1500 }}
+              config={{
+                mass: 2,
+                tension: 500,
+              }}
+              snap
             >
-              <Float speed={1.5} rotationIntensity={0.2} floatIntensity={0.3}>
+              <Float
+                speed={1.5}
+                rotationIntensity={0.2}
+                floatIntensity={0.3}
+              >
                 {children}
               </Float>
             </PresentationControls>
+
           ) : (
-            <Float speed={1.5} rotationIntensity={0.2} floatIntensity={0.3}>
+
+            /* Default Floating Model */
+            <Float
+              speed={1.5}
+              rotationIntensity={0.2}
+              floatIntensity={0.3}
+            >
               {children}
             </Float>
+
           )}
+
         </Suspense>
       </Canvas>
     </div>
