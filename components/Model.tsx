@@ -18,6 +18,10 @@ interface ModelProps {
   tvLoop?: boolean;
   enableRotation?: boolean;
   enableParallax?: boolean;
+  enableFade?: boolean;
+  preserveMaterials?: boolean;
+  preserveLights?: boolean;
+  environmentIntensity?: number;
 }
 
 export default function Model({
@@ -25,6 +29,12 @@ export default function Model({
   tvVideoUrl = '/videos/sample.mp4',
   tvMuted = true,
   tvLoop = true,
+  enableRotation = false,
+  enableParallax = true,
+  enableFade = false,
+  preserveMaterials = true,
+  preserveLights = true,
+  environmentIntensity = 0.3,
 }: ModelProps) {
   const groupRef = useRef<THREE.Group>(null);
   const videoTextureRef = useRef<THREE.VideoTexture | null>(null);
