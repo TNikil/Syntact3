@@ -23,8 +23,8 @@ export default function TestCanvas({
   cameraPosition = [0, 0, 8],
   cameraFov = 30,
   alpha = true,
-  toneMapping = 0,
-  exposure = 0.8,
+  toneMapping = THREE.ACESFilmicToneMapping, // Updated default for vivid, rich colors
+  exposure = 1.0, // Balanced exposure for standard lighting
   controls = true,
 }: TestCanvasProps) {
   return (
@@ -56,8 +56,7 @@ export default function TestCanvas({
           alpha: alpha,
           toneMapping: toneMapping as THREE.ToneMapping,
           toneMappingExposure: exposure,
-
-          powerPreference: 'default', // Safer across virtualized or integrated graphics
+          powerPreference: 'default',
           failIfMajorPerformanceCaveat: false,
         }}
         camera={{
