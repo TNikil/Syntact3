@@ -30,7 +30,7 @@ export default function Model({
   const videoTextureRef = useRef<THREE.VideoTexture | null>(null);
 
   // Load model (syntact8_model)
-  const { scene, animations } = useGLTF('/models/syntact5_model.glb');
+  const { scene, animations } = useGLTF('/models/syntact6_model.glb');
 
   // Initialize animations
   const { actions, names } = useAnimations(animations, groupRef);
@@ -108,4 +108,4 @@ export default function Model({
   return <primitive ref={groupRef} object={scene} scale={scale} />;
 }
 
-useGLTF.preload('/models/syntact5_model.glb');
+useGLTF.preload('/models/syntact6_model.glb');
