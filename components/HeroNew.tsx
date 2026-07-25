@@ -16,7 +16,7 @@ export default function HeroNew() {
   return (
     <section className={styles.hero}>
       <div className={styles.inner}>
-        {/* Left Content Side - EXACT text from your old hero */}
+        {/* Left Content Side */}
         <div className={styles.contentSide}>
           <motion.p
             className={styles.tag}
@@ -68,7 +68,7 @@ export default function HeroNew() {
           </motion.div>
         </div>
 
-        {/* Right Object Side - 3D Model */}
+        {/* Right Object Side */}
         <div className={styles.objectSide}>
           <div className={styles.renderAsset}>
             <TestCanvas
@@ -83,16 +83,11 @@ export default function HeroNew() {
                 background={false}
                 environmentIntensity={0.3}
               />
+
               <ambientLight intensity={0.2} />
+
               <Model
                 scale={0.4}
-                enableRotation={false}
-                enableParallax={true}
-                enableFade={true}
-                preserveMaterials={true}
-                preserveLights={true}
-                environmentIntensity={0.3}
-                exposure={1.0}
                 tvVideoUrl="/videos/sample.mp4"
                 tvMuted={true}
                 tvLoop={true}
