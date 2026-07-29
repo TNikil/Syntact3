@@ -14,6 +14,7 @@ const CONFIG = {
 interface ModelProps {
   scale?: number;
   tvVideoUrl?: string;
+  tvTwoVideoUrl?: string;
   tvMuted?: boolean;
   tvLoop?: boolean;
   enableRotation?: boolean;
@@ -23,13 +24,15 @@ interface ModelProps {
 export default function Model({
   scale = CONFIG.INITIAL_SCALE,
   tvVideoUrl = '/videos/sample.mp4',
+  tvTwoVideoUrl = '/videos/sample_2.MKV',
   tvMuted = true,
   tvLoop = true,
 }: ModelProps) {
   const groupRef = useRef<THREE.Group>(null);
   const videoTextureRef = useRef<THREE.VideoTexture | null>(null);
+  const videoTwoTextureRef = useRef<THREE.VideoTexture | null>(null);
 
-  // Load model (syntact8_model)
+  // Load model (syntact1_model)
   const { scene, animations } = useGLTF('/models/syntact1_model.glb');
 
   // Initialize animations
@@ -63,37 +66,58 @@ export default function Model({
     });
   }, [actions, names]);
 
-  // 3. Client-side only: Setup TV Video
+  // 3. Client-side only: Setup TV Videos (Screen 1 & Screen 2)
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    const video = document.createElement('video');
-    video.src = tvVideoUrl;
-    video.muted = tvMuted;
-    video.loop = tvLoop;
-    video.playsInline = true;
-    video.crossOrigin = 'anonymous';
-    video.play().catch(() => {});
+    // --- Video 1 Setup ---
+    const video1 = document.createElement('video');
+    video1.src = tvVideoUrl;
+    video1.muted = tvMuted;
+    video1.loop = tvLoop;
+    video1.playsInline = true;
+    video1.crossOrigin = 'anonymous';
+    video1.play().catch(() => {});
 
-    const texture = new THREE.VideoTexture(video);
-    texture.colorSpace = THREE.SRGBColorSpace;
-    videoTextureRef.current = texture;
+    const texture1 = new THREE.VideoTexture(video1);
+    texture1.colorSpace = THREE.SRGBColorSpace;
+    videoTextureRef.current = texture1;
 
-    // Apply to TV_Screen
+    // --- Video 2 Setup ---
+    const video2 = document.createElement('video');
+    video2.src = tvTwoVideoUrl;
+    video2.muted = tvMuted;
+    video2.loop = tvLoop;
+    video2.playsInline = true;
+    video2.crossOrigin = 'anonymous';
+    video2.play().catch(() => {});
+
+    const texture2 = new THREE.VideoTexture(video2);
+    texture2.colorSpace = THREE.SRGBColorSpace;
+    videoTwoTextureRef.current = texture2;
+
+    // Apply textures to respective screen meshes by name
     scene.traverse((node) => {
-      if ((node as THREE.Mesh).name === 'TV_Screen') {
-        (node as THREE.Mesh).material = new THREE.MeshBasicMaterial({
-          map: texture,
-        });
+      if ((node as THREE.Mesh).isMesh) {
+        const mesh = node as THREE.Mesh;
+        if (mesh.name === 'TV_Screen') {
+          mesh.material = new THREE.MeshBasicMaterial({ map: texture1 });
+        } else if (mesh.name === 'TV_Screen_2') {
+          mesh.material = new THREE.MeshBasicMaterial({ map: texture2 });
+        }
       }
     });
 
     return () => {
-      video.pause();
-      video.src = '';
-      texture.dispose();
+      video1.pause();
+      video1.src = '';
+      texture1.dispose();
+
+      video2.pause();
+      video2.src = '';
+      texture2.dispose();
     };
-  }, [scene, tvVideoUrl, tvMuted, tvLoop]);
+  }, [scene, tvVideoUrl, tvTwoVideoUrl, tvMuted, tvLoop]);
 
   // 4. Animation loop
   useFrame((state) => {
@@ -102,6 +126,8 @@ export default function Model({
         Math.sin(state.clock.elapsedTime * CONFIG.FLOAT_SPEED) *
         CONFIG.FLOAT_AMOUNT;
       if (videoTextureRef.current) videoTextureRef.current.needsUpdate = true;
+      if (videoTwoTextureRef.current)
+        videoTwoTextureRef.current.needsUpdate = true;
     }
   });
 

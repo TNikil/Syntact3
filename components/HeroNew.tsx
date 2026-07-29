@@ -74,18 +74,51 @@ export default function HeroNew() {
             <TestCanvas
               cameraPosition={[0, 0, 6]}
               cameraFov={25}
-              exposure={0.8}
-              toneMapping={0}
+              exposure={1.1}
+              toneMapping={4} // ACESFilmic
               controls={true}
             >
+              {/* Slightly brighter environment fill */}
               <Environment
-                preset="studio"
+                preset="city"
                 background={false}
-                environmentIntensity={0.3}
+                environmentIntensity={0.4}
               />
 
-              <ambientLight intensity={0.2} />
+              {/* Soft overall ambient light to lift deep shadows */}
+              <ambientLight intensity={0.4} />
 
+              {/* --- BRIGHTER THEATER SPOTLIGHTS --- */}
+
+              {/* 1. Main Key Spotlight (Top Front-Right) */}
+              <spotLight
+                position={[4, 6, 4]}
+                angle={0.6}
+                penumbra={0.8}
+                intensity={25}
+                color="#ffffff"
+                castShadow
+              />
+
+              {/* 2. Fill Spotlight (Top Front-Left) */}
+              <spotLight
+                position={[-4, 5, 3]}
+                angle={0.7}
+                penumbra={1}
+                intensity={15}
+                color="#a0c0ff"
+              />
+
+              {/* 3. Dramatic Rim / Backlight (Behind the model) */}
+              <spotLight
+                position={[0, 5, -5]}
+                angle={0.8}
+                penumbra={0.5}
+                intensity={30}
+                color="#fff5ee"
+              />
+
+              {/* The 3D Model */}
               <Model
                 scale={0.4}
                 tvVideoUrl="/videos/sample.mp4"
