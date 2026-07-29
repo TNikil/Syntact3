@@ -122,6 +122,8 @@ export default function HeroNew() {
               <Model
                 scale={0.4}
                 tvVideoUrl="/videos/sample.mp4"
+                tvTwoVideoUrl="/videos/sample_2.mp4"
+                playbackRate={0.3}
                 tvMuted={true}
                 tvLoop={true}
               />
