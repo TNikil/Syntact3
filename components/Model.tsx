@@ -9,6 +9,7 @@ const CONFIG = {
   FLOAT_SPEED: 0.4,
   FLOAT_AMOUNT: 0.08,
   INITIAL_SCALE: 2.5,
+  VIDEO_SPEED: 0.5, // 0.5 = half speed (slow motion), 1.0 = normal speed
 };
 
 interface ModelProps {
@@ -17,6 +18,7 @@ interface ModelProps {
   tvTwoVideoUrl?: string;
   tvMuted?: boolean;
   tvLoop?: boolean;
+  playbackRate?: number; // Optional prop to adjust speed dynamically
   enableRotation?: boolean;
   enableParallax?: boolean;
 }
@@ -24,9 +26,10 @@ interface ModelProps {
 export default function Model({
   scale = CONFIG.INITIAL_SCALE,
   tvVideoUrl = '/videos/sample.mp4',
-  tvTwoVideoUrl = '/videos/sample_2.MKV',
+  tvTwoVideoUrl = '/videos/sample_2.mp4',
   tvMuted = true,
   tvLoop = true,
+  playbackRate = CONFIG.VIDEO_SPEED,
 }: ModelProps) {
   const groupRef = useRef<THREE.Group>(null);
   const videoTextureRef = useRef<THREE.VideoTexture | null>(null);
@@ -66,7 +69,7 @@ export default function Model({
     });
   }, [actions, names]);
 
-  // 3. Client-side only: Setup TV Videos (Screen 1 & Screen 2)
+  // 3. Client-side only: Setup TV Videos (Screen 1 & Screen 2) in Slow Motion
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
@@ -77,6 +80,7 @@ export default function Model({
     video1.loop = tvLoop;
     video1.playsInline = true;
     video1.crossOrigin = 'anonymous';
+    video1.playbackRate = playbackRate; // Sets slow motion speed
     video1.play().catch(() => {});
 
     const texture1 = new THREE.VideoTexture(video1);
@@ -90,6 +94,7 @@ export default function Model({
     video2.loop = tvLoop;
     video2.playsInline = true;
     video2.crossOrigin = 'anonymous';
+    video2.playbackRate = playbackRate; // Sets slow motion speed
     video2.play().catch(() => {});
 
     const texture2 = new THREE.VideoTexture(video2);
@@ -117,7 +122,7 @@ export default function Model({
       video2.src = '';
       texture2.dispose();
     };
-  }, [scene, tvVideoUrl, tvTwoVideoUrl, tvMuted, tvLoop]);
+  }, [scene, tvVideoUrl, tvTwoVideoUrl, tvMuted, tvLoop, playbackRate]);
 
   // 4. Animation loop
   useFrame((state) => {
