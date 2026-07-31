@@ -21,6 +21,7 @@ interface ModelProps {
   playbackRate?: number; // Optional prop to adjust speed dynamically
   enableRotation?: boolean;
   enableParallax?: boolean;
+  onLightPositionUpdate?: (position: [number, number, number]) => void; // Optional callback to pass position back up to canvas/parent if needed
 }
 
 export default function Model({
@@ -30,10 +31,12 @@ export default function Model({
   tvMuted = true,
   tvLoop = true,
   playbackRate = CONFIG.VIDEO_SPEED,
+  onLightPositionUpdate,
 }: ModelProps) {
   const groupRef = useRef<THREE.Group>(null);
   const videoTextureRef = useRef<THREE.VideoTexture | null>(null);
   const videoTwoTextureRef = useRef<THREE.VideoTexture | null>(null);
+  const lightSourceMeshRef = useRef<THREE.Mesh | null>(null);
 
   // Load model (syntact1_model)
   const { scene, animations } = useGLTF('/models/syntact1_model.glb');
@@ -41,11 +44,21 @@ export default function Model({
   // Initialize animations
   const { actions, names } = useAnimations(animations, groupRef);
 
-  // 1. Fix texture color spaces & ensure materials render colors properly
+  // 1. Fix texture color spaces & detect the Light Source Mesh
   useEffect(() => {
     scene.traverse((node) => {
       if ((node as THREE.Mesh).isMesh) {
         const mesh = node as THREE.Mesh;
+
+        // Capture reference to the emitter mesh
+        if (mesh.name === 'Light_Source_Mesh') {
+          lightSourceMeshRef.current = mesh;
+          // Make the mesh itself visibly glow electric blue
+          mesh.material = new THREE.MeshBasicMaterial({
+            color: new THREE.Color('#0088ff').multiplyScalar(5),
+          });
+        }
+
         if (mesh.material) {
           const materials = Array.isArray(mesh.material)
             ? mesh.material
@@ -80,7 +93,7 @@ export default function Model({
     video1.loop = tvLoop;
     video1.playsInline = true;
     video1.crossOrigin = 'anonymous';
-    video1.playbackRate = playbackRate; // Sets slow motion speed
+    video1.playbackRate = playbackRate;
     video1.play().catch(() => {});
 
     const texture1 = new THREE.VideoTexture(video1);
@@ -94,7 +107,7 @@ export default function Model({
     video2.loop = tvLoop;
     video2.playsInline = true;
     video2.crossOrigin = 'anonymous';
-    video2.playbackRate = playbackRate; // Sets slow motion speed
+    video2.playbackRate = playbackRate;
     video2.play().catch(() => {});
 
     const texture2 = new THREE.VideoTexture(video2);
@@ -124,7 +137,8 @@ export default function Model({
     };
   }, [scene, tvVideoUrl, tvTwoVideoUrl, tvMuted, tvLoop, playbackRate]);
 
-  // 4. Animation loop
+  // 4. Animation loop & Dynamic Light Tracking
+  const worldPos = new THREE.Vector3();
   useFrame((state) => {
     if (groupRef.current) {
       groupRef.current.position.y =
@@ -133,6 +147,12 @@ export default function Model({
       if (videoTextureRef.current) videoTextureRef.current.needsUpdate = true;
       if (videoTwoTextureRef.current)
         videoTwoTextureRef.current.needsUpdate = true;
+
+      // Track exact world position of the light source mesh if it moves/floats with the model
+      if (lightSourceMeshRef.current && onLightPositionUpdate) {
+        lightSourceMeshRef.current.getWorldPosition(worldPos);
+        onLightPositionUpdate([worldPos.x, worldPos.y, worldPos.z]);
+      }
     }
   });
 

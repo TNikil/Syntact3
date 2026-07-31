@@ -74,51 +74,42 @@ export default function HeroNew() {
             <TestCanvas
               cameraPosition={[0, 0, 6]}
               cameraFov={25}
-              exposure={1.1}
-              toneMapping={4} // ACESFilmic
+              exposure={0.85}
+              toneMapping={4} // ACESFilmic for striking contrast
               controls={true}
             >
-              {/* Slightly brighter environment fill */}
+              {/* Pitch-dark environment preset with minimal bleed */}
               <Environment
-                preset="city"
+                preset="night"
                 background={false}
-                environmentIntensity={0.4}
+                environmentIntensity={0.05}
               />
 
-              {/* Soft overall ambient light to lift deep shadows */}
-              <ambientLight intensity={0.4} />
+              {/* Minimal ambient light so unlit areas stay completely black */}
+              <ambientLight intensity={0.02} />
 
-              {/* --- BRIGHTER THEATER SPOTLIGHTS --- */}
+              {/* --- ONLY THE BLUE THEATER SPOTLIGHT --- */}
 
-              {/* 1. Main Key Spotlight (Top Front-Right) */}
               <spotLight
-                position={[4, 6, 4]}
-                angle={0.6}
-                penumbra={0.8}
-                intensity={25}
-                color="#ffffff"
+                position={[2, 4, 3]}
+                angle={0.45}
+                penumbra={0.9}
+                intensity={180}
+                color="#172f43"
+                distance={15}
                 castShadow
               />
 
-              {/* 2. Fill Spotlight (Top Front-Left) */}
+              {/* Optional subtle rim backlight for edge separation */}
               <spotLight
-                position={[-4, 5, 3]}
-                angle={0.7}
+                position={[-2, 4, -3]}
+                angle={0.6}
                 penumbra={1}
-                intensity={15}
-                color="#a0c0ff"
+                intensity={40}
+                color="#61b7e0"
               />
 
-              {/* 3. Dramatic Rim / Backlight (Behind the model) */}
-              <spotLight
-                position={[0, 5, -5]}
-                angle={0.8}
-                penumbra={0.5}
-                intensity={30}
-                color="#fff5ee"
-              />
-
-              {/* The 3D Model */}
+              {/* The 3D Model with Dual Slow-Motion Videos */}
               <Model
                 scale={0.4}
                 tvVideoUrl="/videos/sample_2.mp4"
