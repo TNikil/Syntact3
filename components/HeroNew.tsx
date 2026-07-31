@@ -95,7 +95,7 @@ export default function HeroNew() {
                 angle={0.45}
                 penumbra={0.9}
                 intensity={180}
-                color="#172f43"
+                color="#416e92"
                 distance={15}
                 castShadow
               />
@@ -106,7 +106,7 @@ export default function HeroNew() {
                 angle={0.6}
                 penumbra={1}
                 intensity={40}
-                color="#61b7e0"
+                color="#ea8b4c"
               />
 
               {/* The 3D Model with Dual Slow-Motion Videos */}
