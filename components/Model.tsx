@@ -25,8 +25,8 @@ interface ModelProps {
 
 export default function Model({
   scale = CONFIG.INITIAL_SCALE,
-  tvVideoUrl = '/videos/sample.mp4',
-  tvTwoVideoUrl = '/videos/sample_2.mp4',
+  tvVideoUrl = '/videos/sample_2.mp4',
+  tvTwoVideoUrl = '/videos/sample.mp4',
   tvMuted = true,
   tvLoop = true,
   playbackRate = CONFIG.VIDEO_SPEED,
