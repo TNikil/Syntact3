@@ -44,7 +44,7 @@ export default function Model({
   // Initialize animations
   const { actions, names } = useAnimations(animations, groupRef);
 
-  // 1. Fix texture color spaces & detect the Light Source Mesh
+  // 1. Fix texture color spaces & detect the Light Source Mesh / Transparent Glass Mesh
   useEffect(() => {
     scene.traverse((node) => {
       if ((node as THREE.Mesh).isMesh) {
@@ -56,6 +56,22 @@ export default function Model({
           // Make the mesh itself visibly glow electric blue
           mesh.material = new THREE.MeshBasicMaterial({
             color: new THREE.Color('#0088ff').multiplyScalar(5),
+          });
+        }
+
+        // Apply Clear Glass Material to the "transparent" mesh
+        if (mesh.name === 'transparent') {
+          mesh.material = new THREE.MeshPhysicalMaterial({
+            color: new THREE.Color('#ffffff'),
+            metalness: 0.1,
+            roughness: 0.1,
+            transmission: 0.9,
+            thickness: 1.2,
+            ior: 1.5,
+            transparent: true,
+            opacity: 1,
+            envMapIntensity: 1.5,
+            depthWrite: false,
           });
         }
 

@@ -86,7 +86,7 @@ export default function HeroNew() {
               />
 
               {/* Minimal ambient light so unlit areas stay completely black */}
-              <ambientLight intensity={0.02} />
+              <ambientLight intensity={0.83} />
 
               {/* --- ONLY THE BLUE THEATER SPOTLIGHT --- */}
 
