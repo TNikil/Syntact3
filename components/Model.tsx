@@ -44,7 +44,7 @@ export default function Model({
   // Initialize animations
   const { actions, names } = useAnimations(animations, groupRef);
 
-  // 1. Fix texture color spaces & detect the Light Source Mesh / Transparent Glass Mesh
+  // 1. Fix texture color spaces & configure custom meshes (Light, Glass, and Glowing Eyes)
   useEffect(() => {
     scene.traverse((node) => {
       if ((node as THREE.Mesh).isMesh) {
@@ -53,7 +53,6 @@ export default function Model({
         // Capture reference to the emitter mesh
         if (mesh.name === 'Light_Source_Mesh') {
           lightSourceMeshRef.current = mesh;
-          // Make the mesh itself visibly glow electric blue
           mesh.material = new THREE.MeshBasicMaterial({
             color: new THREE.Color('#0088ff').multiplyScalar(5),
           });
@@ -64,14 +63,25 @@ export default function Model({
           mesh.material = new THREE.MeshPhysicalMaterial({
             color: new THREE.Color('#ffffff'),
             metalness: 0.1,
-            roughness: 0.1,
+            roughness: 0.02,
             transmission: 0.9,
-            thickness: 1.2,
+            thickness: 0.05,
             ior: 1.5,
             transparent: true,
             opacity: 1,
             envMapIntensity: 1.5,
             depthWrite: false,
+          });
+        }
+
+        // Apply Wall-E style glowing blue effect to eyes_1 and eyes_2
+        if (mesh.name === 'eyes_1' || mesh.name === 'eyes_2') {
+          mesh.material = new THREE.MeshStandardMaterial({
+            color: new THREE.Color('#1660a0'),
+            emissive: new THREE.Color('#1660a0'),
+            emissiveIntensity: 4.5, // High intensity to shine brightly through the glass face cover
+            roughness: 0.2,
+            metalness: 0.1,
           });
         }
 
