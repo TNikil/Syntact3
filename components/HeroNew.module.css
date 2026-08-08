@@ -2,61 +2,64 @@
 
 .hero {
   min-height: 100vh;
-  display: grid;
-  align-items: center;
-  padding: 8rem 3rem 6rem;
-  background: var(--ink);
+  width: 100%;
   position: relative;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  background: var(--ink);
 }
 
-.inner {
+/* --- Full-Screen Canvas Background --- */
+.canvasBackground {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+/* --- Glassmorphism Overlay Container --- */
+.innerOverlay {
+  position: relative;
+  z-index: 2;
   width: 100%;
   max-width: 1440px;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 3rem;
+  padding: 0 3rem;
+  display: flex;
   align-items: center;
+  pointer-events: none; /* Allows pointer events to pass through to the 3D canvas where text isn't blocking */
 }
 
-/* --- Layout Split for Desktop --- */
-@media (min-width: 769px) {
-  .inner {
-    grid-template-columns: 1.1fr 0.9fr;
-    gap: 4rem;
-    position: relative;
-  }
-
-  .objectSide {
-    position: absolute;
-    right: -2rem;
-    top: -3rem;
-    bottom: 0;
-    width: 45%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+.glassCard {
+  pointer-events: auto; /* Re-enables clicking and interacting with buttons/links */
+  background: rgba(15, 23, 42, 0.45); /* Deep dark frosted glass tint */
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  padding: 3.5rem;
+  max-width: 620px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
 }
 
 /* --- Mobile Setup --- */
 @media (max-width: 768px) {
   .hero {
-    padding: 7rem 1.5rem 4rem;
-    min-height: auto;
+    min-height: 100vh;
+    padding: 2rem 1rem;
   }
 
-  .inner {
-    gap: 4rem;
+  .innerOverlay {
+    padding: 0 1rem;
   }
 
-  .objectSide {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
+  .glassCard {
+    padding: 2rem;
+    max-width: 100%;
   }
 
   .desc {
@@ -66,30 +69,6 @@
   .cta {
     gap: 1rem;
   }
-
-  .renderAsset {
-    max-width: 320px;
-  }
-}
-
-/* --- Object Side Wrapper --- */
-.objectSide {
-  pointer-events: none;
-  user-select: none;
-  -webkit-user-select: none;
-  animation: fadeUp 1.2s 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-.objectSide > div {
-  pointer-events: auto;
-}
-
-.renderAsset {
-  width: 100%;
-  max-width: 780px;
-  height: 95%;
-  object-fit: contain;
-  filter: drop-shadow(0 35px 80px rgba(211, 78, 36, 0.16));
 }
 
 /* --- Typography --- */
@@ -109,7 +88,7 @@
 
 .headline {
   font-family: 'Bahnschrift', sans-serif;
-  font-size: clamp(3.8rem, 8vw, 8rem);
+  font-size: clamp(3.2rem, 7vw, 6.5rem);
   line-height: 0.87;
   letter-spacing: 0.01em;
   margin-bottom: 2rem;
@@ -124,8 +103,8 @@
 
 .desc {
   font-size: clamp(1.1rem, 2vw, 1.4rem);
-  line-height: 0.98;
-  max-width: 420px;
+  line-height: 1.2;
+  max-width: 480px;
   margin-bottom: 2.8rem;
   animation: fadeUp 0.8s 0.2s ease both;
   font-family: 'Bahnschrift', sans-serif;
