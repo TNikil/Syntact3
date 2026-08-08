@@ -1,3 +1,4 @@
+// Work.tsx
 'use client';
 
 import { useState } from 'react';
@@ -112,7 +113,6 @@ const projects = [
     desc: 'Black and White Retro Save the Date  Wedding Invitation Flyer.',
     image: '/images/wedding-invitation.jpg',
   },
-
   {
     name: 'Hatti',
     type: 'Logo',
@@ -166,7 +166,6 @@ export default function Work() {
     (p) => p.type.toLowerCase() === active.toLowerCase(),
   );
 
-  // Prevents parent anchor tags from executing if image preview is targeted
   const handleImageClick = (e: React.MouseEvent, imgSrc: string) => {
     e.preventDefault();
     e.stopPropagation();
@@ -175,25 +174,30 @@ export default function Work() {
 
   return (
     <section className={styles.section} id="work">
-      <div className={styles.header}>
-        <p className={styles.tag}>Our Work</p>
-        <h2 className={styles.headline}>
-          Work we&apos;re
-          <br />
-          proud of.
-        </h2>
-      </div>
+      {/* Frosted Glass Header Container with Modern Pill Filter Controls */}
+      <div className={styles.glassHeaderContainer}>
+        <div className={styles.header}>
+          <p className={styles.tag}>Our Work</p>
+          <h2 className={styles.headline}>
+            Work we&apos;re
+            <br />
+            <em className={styles.accent}>proud of.</em>
+          </h2>
+        </div>
 
-      <div className={styles.filters}>
-        {filters.map((f) => (
-          <button
-            key={f}
-            className={`${styles.filterBtn} ${active === f ? styles.filterActive : ''}`}
-            onClick={() => setActive(f)}
-          >
-            {f}
-          </button>
-        ))}
+        <div className={styles.filters}>
+          {filters.map((f) => (
+            <button
+              key={f}
+              className={`${styles.filterBtn} ${
+                active === f ? styles.filterActive : ''
+              }`}
+              onClick={() => setActive(f)}
+            >
+              {f}
+            </button>
+          ))}
+        </div>
       </div>
 
       <div className={styles.grid}>
@@ -218,7 +222,6 @@ export default function Work() {
                 </div>
               </div>
 
-              {/* Click handler integrated here */}
               <div
                 className={styles.imagePreview}
                 onClick={(e) => handleImageClick(e, p.image)}
@@ -246,7 +249,6 @@ export default function Work() {
         })}
       </div>
 
-      {/* Pop-up Modal UI Layout */}
       {selectedImage && (
         <div
           className={styles.modalOverlay}
