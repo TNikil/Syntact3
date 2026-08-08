@@ -1,3 +1,6 @@
+// Services.tsx
+'use client';
+
 import styles from './Services.module.css';
 
 const services = [
@@ -28,7 +31,7 @@ const services = [
   {
     num: '03',
     name: 'Creative Design',
-    desc: 'Unleashing creative freedom to every touchpoint of your brand\'s visual world.',
+    desc: "Unleashing creative freedom to every touchpoint of your brand's visual world.",
     items: [
       'Creative Visual Design',
       'Video Production & Editing',
@@ -42,10 +45,15 @@ const services = [
 export default function Services() {
   return (
     <section className={styles.section} id="services">
-      <p className={styles.tag}>What We Do</p>
-      <h2 className={styles.headline}>
-        Services built for<br />bold brands.
-      </h2>
+      <div className={styles.glassHeaderContainer}>
+        <p className={styles.tag}>What We Do</p>
+        <h2 className={styles.headline}>
+          Services built for
+          <br />
+          <em className={styles.accent}>bold brands.</em>
+        </h2>
+      </div>
+
       <div className={styles.grid}>
         {services.map((s) => (
           <div className={styles.card} key={s.num}>
@@ -54,7 +62,9 @@ export default function Services() {
             <p className={styles.cardDesc}>{s.desc}</p>
             <ul className={styles.list}>
               {s.items.map((item) => (
-                <li key={item} className={styles.listItem}>{item}</li>
+                <li key={item} className={styles.listItem}>
+                  {item}
+                </li>
               ))}
             </ul>
           </div>
