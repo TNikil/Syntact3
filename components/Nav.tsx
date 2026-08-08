@@ -1,43 +1,59 @@
-// Nav.tsx
 'use client';
 
 import { useEffect, useState } from 'react';
+
+import Image from 'next/image';
+
 import styles from './Nav.module.css';
+
 import LogoSync3 from './icons/LogoSyn3';
 
 // Setup TypeScript bindings for the script window objects
+
 declare global {
   interface Window {
     google: any;
+
     googleTranslateElementInit: () => void;
   }
 }
 
 const links = [
   { label: 'Work', href: '#work' },
+
   { label: 'Services', href: '#services' },
+
   { label: 'About', href: '#about' },
+
   { label: 'Contact', href: '#contact' },
 ];
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
+
   const [menuOpen, setMenuOpen] = useState(false);
+
   const [currentLang, setCurrentLang] = useState('en');
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
+
     window.addEventListener('scroll', onScroll);
 
     // Core listener hook for Google engine setup
+
     window.googleTranslateElementInit = () => {
       new window.google.translate.TranslateElement(
         {
           pageLanguage: 'en',
+
           includedLanguages: 'en,ar',
+
           layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE,
+
           autoDisplay: false,
         },
+
         'google_translate_element',
       );
     };
@@ -48,25 +64,33 @@ export default function Nav() {
   const closeMenu = () => setMenuOpen(false);
 
   // Fires the manual drop-down dispatch event for translation
+
   const handleTranslate = (langCode: string) => {
     // 1. Production domain handling vs local host fallback rules
+
     if (window.location.hostname === 'localhost') {
       document.cookie = `googtrans=/en/${langCode}; path=/;`;
     } else {
       document.cookie = `googtrans=/en/${langCode}; path=/; domain=.syntact3.com;`;
+
       document.cookie = `googtrans=/en/${langCode}; path=/;`; // Safe redundant fallback
     }
 
     // 2. Automated component change target check
+
     const selectEl = document.querySelector(
       '.goog-te-combo',
     ) as HTMLSelectElement;
+
     if (selectEl) {
       selectEl.value = langCode;
+
       selectEl.dispatchEvent(new Event('change'));
+
       setCurrentLang(langCode);
     } else {
       // 3. Fallback reload to parse cookies if runtime script evaluation is delayed
+
       window.location.reload();
     }
 
@@ -78,15 +102,18 @@ export default function Nav() {
   return (
     <>
       {/* Target selector placeholder hook required by Google API */}
+
       <div id="google_translate_element" style={{ display: 'none' }} />
 
       <nav className={`${styles.nav} ${scrolled ? styles.scrolled : ''}`}>
         {/* Logo wrapper using your precise inline SVG engine */}
+
         <a href="#" className={styles.logo}>
           <LogoSync3 className="w-auto h-4 md:h-5" />
         </a>
 
         {/* Desktop elements layout grouping links + translation toggles */}
+
         <div className={styles.navRight}>
           <ul className={styles.links}>
             {links.map((l) => (
@@ -99,6 +126,7 @@ export default function Nav() {
           </ul>
 
           {/* Main Desktop Language Controls */}
+
           <div className={styles.langSwitchDesktop}>
             <button
               className={`${styles.langBtn} ${
@@ -108,7 +136,9 @@ export default function Nav() {
             >
               EN
             </button>
+
             <span className={styles.langDivider}>/</span>
+
             <button
               className={`${styles.langBtn} ${
                 currentLang === 'ar' ? styles.langActive : ''
@@ -121,6 +151,7 @@ export default function Nav() {
         </div>
 
         {/* Mobile hamburger */}
+
         <button
           className={styles.burger}
           onClick={() => setMenuOpen((o) => !o)}
@@ -129,9 +160,11 @@ export default function Nav() {
           <span
             className={`${styles.bar} ${menuOpen ? styles.barOpen1 : ''}`}
           />
+
           <span
             className={`${styles.bar} ${menuOpen ? styles.barOpen2 : ''}`}
           />
+
           <span
             className={`${styles.bar} ${menuOpen ? styles.barOpen3 : ''}`}
           />
@@ -139,6 +172,7 @@ export default function Nav() {
       </nav>
 
       {/* Mobile drawer layout config */}
+
       <div className={`${styles.drawer} ${menuOpen ? styles.drawerOpen : ''}`}>
         <ul className={styles.drawerLinks}>
           {links.map((l) => (
@@ -155,6 +189,7 @@ export default function Nav() {
         </ul>
 
         {/* Bottom anchor language toggle inside mobile display */}
+
         <div className={styles.langSwitchMobile}>
           <button
             className={`${styles.langBtnMobile} ${
@@ -167,7 +202,9 @@ export default function Nav() {
           >
             EN
           </button>
+
           <span className={styles.langDividerMobile}>/</span>
+
           <button
             className={`${styles.langBtnMobile} ${
               currentLang === 'ar' ? styles.langActiveMobile : ''
@@ -181,6 +218,7 @@ export default function Nav() {
           </button>
         </div>
       </div>
+
       {menuOpen && <div className={styles.overlay} onClick={closeMenu} />}
     </>
   );
