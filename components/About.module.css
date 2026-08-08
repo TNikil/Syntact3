@@ -1,6 +1,9 @@
+/* About.module.css */
+
 .section {
   padding: 7rem 3rem;
   background: var(--cream);
+  position: relative;
 }
 
 .grid {
@@ -11,7 +14,8 @@
 }
 
 /* Left */
-.left {}
+.left {
+}
 
 .tag {
   font-size: 0.72rem;
@@ -22,11 +26,12 @@
 }
 
 .headline {
-  font-family: var(--serif);
+  font-family: 'Bahnschrift', sans-serif;
   font-size: clamp(2.4rem, 5vw, 4rem);
   letter-spacing: -0.03em;
   line-height: 1.06;
   margin-bottom: 1.8rem;
+  color: var(--ink);
 }
 
 .accent {
@@ -49,31 +54,37 @@
   gap: 0.75rem;
 }
 
-/* UPDATED: Changed to flex layout to hold image + text horizontally */
 .teamCard {
   background: var(--ink);
   color: var(--cream);
-  padding: 1.2rem; /* slightly tweaked for better image spacing */
+  padding: 1.2rem;
   position: relative;
   overflow: hidden;
   display: flex;
   align-items: center;
   gap: 1rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* NEW: Rounded profile image style */
+.teamCard:hover {
+  border-color: rgba(255, 255, 255, 0.12);
+  transform: translateY(-2px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
 .teamImage {
   width: 3.5rem;
   height: 3.5rem;
   border-radius: 50%;
   object-fit: cover;
   flex-shrink: 0;
-  filter: grayscale(100%); /* Keeps editorial boutique aesthetic */
+  filter: grayscale(100%);
   transition: filter 0.3s ease;
   z-index: 1;
 }
 
-/* NEW: Card text container wrapper */
 .teamInfo {
   display: flex;
   flex-direction: column;
@@ -81,41 +92,38 @@
   z-index: 1;
 }
 
-/* NEW: LinkedIn Link Wrapper */
 .linkedinLink {
   margin-top: 0.4rem;
   display: inline-block;
   width: fit-content;
 }
 
-/* NEW: LinkedIn SVG settings */
 .linkedinIcon {
   width: 1rem;
   height: 1rem;
-  fill: rgba(255, 255, 255, 0.4); /* Fades nicely into dark bg */
+  fill: rgba(255, 255, 255, 0.4);
   transition: fill 0.2s ease;
 }
 
-/* HOVER EFFECTS: Colors icon & image on hover */
 .teamCard:hover .teamImage {
   filter: grayscale(0%);
 }
 
 .linkedinLink:hover .linkedinIcon {
-  fill: #0077b5; /* Official LinkedIn Blue */
+  fill: #0077b5;
 }
 
 .teamInitial {
   position: absolute;
   top: -0.6rem;
   right: 0.5rem;
-  font-family: var(--serif);
+  font-family: 'Bahnschrift', sans-serif;
   font-size: 3.2rem;
   line-height: 1;
   opacity: 0.07;
   pointer-events: none;
   user-select: none;
-  z-index: 0; /* Ensures it stays strictly in the background */
+  z-index: 0;
 }
 
 .teamName {
@@ -123,6 +131,8 @@
   font-weight: 500;
   margin-bottom: 0.25rem;
   position: relative;
+  font-family: 'Bahnschrift', sans-serif;
+  letter-spacing: 0.02em;
 }
 
 .teamRole {
@@ -144,10 +154,11 @@
   gap: 3rem 2rem;
 }
 
-.statItem {}
+.statItem {
+}
 
 .statNum {
-  font-family: var(--serif);
+  font-family: 'Bahnschrift', sans-serif;
   font-size: clamp(2.8rem, 5vw, 4rem);
   letter-spacing: -0.04em;
   line-height: 1;

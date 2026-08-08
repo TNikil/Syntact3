@@ -1,7 +1,7 @@
+// Nav.tsx
 'use client';
 
 import { useEffect, useState } from 'react';
-import Image from 'next/image';
 import styles from './Nav.module.css';
 import LogoSync3 from './icons/LogoSyn3';
 
@@ -28,7 +28,7 @@ export default function Nav() {
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener('scroll', onScroll);
-    
+
     // Core listener hook for Google engine setup
     window.googleTranslateElementInit = () => {
       new window.google.translate.TranslateElement(
@@ -38,7 +38,7 @@ export default function Nav() {
           layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE,
           autoDisplay: false,
         },
-        'google_translate_element'
+        'google_translate_element',
       );
     };
 
@@ -58,7 +58,9 @@ export default function Nav() {
     }
 
     // 2. Automated component change target check
-    const selectEl = document.querySelector('.goog-te-combo') as HTMLSelectElement;
+    const selectEl = document.querySelector(
+      '.goog-te-combo',
+    ) as HTMLSelectElement;
     if (selectEl) {
       selectEl.value = langCode;
       selectEl.dispatchEvent(new Event('change'));
@@ -95,18 +97,22 @@ export default function Nav() {
               </li>
             ))}
           </ul>
-          
+
           {/* Main Desktop Language Controls */}
           <div className={styles.langSwitchDesktop}>
-            <button 
-              className={`${styles.langBtn} ${currentLang === 'en' ? styles.langActive : ''}`} 
+            <button
+              className={`${styles.langBtn} ${
+                currentLang === 'en' ? styles.langActive : ''
+              }`}
               onClick={() => handleTranslate('en')}
             >
               EN
             </button>
             <span className={styles.langDivider}>/</span>
-            <button 
-              className={`${styles.langBtn} ${currentLang === 'ar' ? styles.langActive : ''}`} 
+            <button
+              className={`${styles.langBtn} ${
+                currentLang === 'ar' ? styles.langActive : ''
+              }`}
               onClick={() => handleTranslate('ar')}
             >
               AR
@@ -150,16 +156,26 @@ export default function Nav() {
 
         {/* Bottom anchor language toggle inside mobile display */}
         <div className={styles.langSwitchMobile}>
-          <button 
-            className={`${styles.langBtnMobile} ${currentLang === 'en' ? styles.langActiveMobile : ''}`} 
-            onClick={() => { handleTranslate('en'); closeMenu(); }}
+          <button
+            className={`${styles.langBtnMobile} ${
+              currentLang === 'en' ? styles.langActiveMobile : ''
+            }`}
+            onClick={() => {
+              handleTranslate('en');
+              closeMenu();
+            }}
           >
             EN
           </button>
           <span className={styles.langDividerMobile}>/</span>
-          <button 
-            className={`${styles.langBtnMobile} ${currentLang === 'ar' ? styles.langActiveMobile : ''}`} 
-            onClick={() => { handleTranslate('ar'); closeMenu(); }}
+          <button
+            className={`${styles.langBtnMobile} ${
+              currentLang === 'ar' ? styles.langActiveMobile : ''
+            }`}
+            onClick={() => {
+              handleTranslate('ar');
+              closeMenu();
+            }}
           >
             AR
           </button>

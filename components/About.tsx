@@ -1,3 +1,6 @@
+// About.tsx
+'use client';
+
 import styles from './About.module.css';
 
 const stats = [
@@ -25,7 +28,7 @@ const team = [
   {
     initials: 'HP',
     name: 'Hector Perers',
-    role: 'copywriter',
+    role: 'Copywriter',
     image: '/team/hector.jpg',
     linkedin: 'https://linkedin.com/in/hector',
   },

@@ -1,3 +1,5 @@
+/* Footer.module.css */
+
 .footer {
   background: var(--ink);
   padding: 2rem 3rem;
@@ -6,6 +8,7 @@
   justify-content: space-between;
   gap: 1rem;
   flex-wrap: wrap;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .logo {
@@ -13,6 +16,8 @@
   font-size: 1rem;
   color: var(--cream);
   letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
 }
 
 .copy {
@@ -28,6 +33,7 @@
 
 .link {
   color: rgba(245, 242, 237, 0.4);
+  text-decoration: none;
   transition: color 0.2s;
 }
 

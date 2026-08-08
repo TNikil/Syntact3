@@ -1,3 +1,4 @@
+// Footer.tsx
 import styles from './Footer.module.css';
 import LogoSync3 from './icons/LogoSyn3';
 
@@ -14,7 +15,7 @@ export default function Footer() {
         <LogoSync3 className="w-auto h-4 md:h-5" />
       </span>
       <span className={styles.copy}>
-        © 2025 Syntac Studio. All rights reserved.
+        &copy; 2026 Syntac Studio. All rights reserved.
       </span>
       <div className={styles.socials}>
         {socials.map((s, i) => (

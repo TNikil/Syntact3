@@ -1,23 +1,62 @@
+/* CTA.module.css */
+
 .section {
   background: var(--accent);
-  padding: 10rem 4rem; 
+  padding: 10rem 4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle background accent glow */
+.section::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.12) 0%,
+    transparent 60%
+  );
+  pointer-events: none;
 }
 
 .inner {
   display: flex;
-  align-items: center; 
+  align-items: center;
   justify-content: space-between;
   gap: 4rem;
   max-width: 1400px;
   margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* Frosted glass container for the headline */
+.headlineGlass {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 28px;
+  padding: 4rem 3.5rem;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
 }
 
 .headline {
   font-family: var(--serif);
-  font-size: clamp(3rem, 6.5vw, 6rem); 
+  font-size: clamp(3rem, 6.5vw, 6rem);
   letter-spacing: -0.03em;
   line-height: 1.02;
   color: var(--cream);
+  margin: 0;
+}
+
+.accent {
+  font-style: italic;
+  opacity: 0.9;
 }
 
 /* Right-hand side structural container */
@@ -30,10 +69,17 @@
   flex-shrink: 0;
 }
 
-/* Info Deck Layout */
+/* Info Deck Layout with Frosted Glass Effect */
 .infoDeck {
   display: flex;
   flex-direction: column;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 24px;
+  padding: 2.5rem 2.5rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
 }
 
 .infoGroup {
@@ -41,8 +87,14 @@
   border-top: 1px solid rgba(255, 255, 255, 0.15);
 }
 
+.infoGroup:first-child {
+  padding-top: 0;
+  border-top: none;
+}
+
 .infoGroup:last-child {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  padding-bottom: 0;
+  border-bottom: none;
 }
 
 .infoLabel {
@@ -50,7 +102,7 @@
   font-size: 0.72rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.55);
+  color: rgba(255, 255, 255, 0.65);
   display: block;
   margin-bottom: 0.4rem;
 }
@@ -76,34 +128,33 @@
   gap: 0.75rem;
   background: var(--cream);
   color: var(--ink);
-  padding: 1.2rem 3rem; 
+  padding: 1.2rem 3rem;
   font-size: 0.85rem;
   font-weight: 600;
-  letter-spacing: 0.15em; 
+  letter-spacing: 0.15em;
   text-transform: uppercase;
   font-family: var(--sans);
-  border-radius: 100px; 
-  box-shadow: 0 0 0 rgba(245, 242, 237, 0);
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); 
+  border-radius: 100px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   white-space: nowrap;
   text-decoration: none;
 }
 
 .btnWhite::after {
-  content: '→'; 
+  content: '→';
   font-size: 1.1rem;
   transition: transform 0.3s ease;
 }
 
 .btnWhite:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(245, 242, 237, 0.25), 
-              0 0 20px rgba(245, 242, 237, 0.15);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
   background: #ffffff;
 }
 
 .btnWhite:hover::after {
-  transform: translateX(4px); 
+  transform: translateX(4px);
 }
 
 @media (max-width: 900px) {
@@ -116,14 +167,25 @@
     align-items: flex-start;
     gap: 3.5rem;
   }
-  
+
+  .headlineGlass {
+    padding: 2.5rem 2rem;
+    width: 100%;
+  }
+
   .rightColumn {
     max-width: 100%; /* Spans full width smoothly on tablets/mobile */
     gap: 2.5rem;
   }
 
+  .infoDeck {
+    padding: 2rem;
+  }
+
   .btnWhite {
     padding: 1.1rem 2.6rem;
     font-size: 0.8rem;
+    width: 100%;
+    justify-content: center;
   }
 }

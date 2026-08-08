@@ -1,3 +1,5 @@
+/* Nav.module.css */
+
 .nav {
   position: fixed;
   top: 0;
@@ -8,22 +10,26 @@
   align-items: center;
   justify-content: space-between;
   padding: 1.4rem 3rem;
-  background: rgba(245, 242, 237, 0.92);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-bottom: 1px solid transparent;
-  transition: border-color 0.3s;
+  background: rgba(245, 242, 237, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .scrolled {
+  background: rgba(245, 242, 237, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border-color: var(--border);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
 }
 
 .logo {
   z-index: 101;
   display: flex;
   align-items: center;
-  height: 2.5rem; 
+  height: 2.5rem;
 }
 
 /* Structural wrapper grouping the links + language switches together */
@@ -36,6 +42,9 @@
 .links {
   display: flex;
   gap: 2.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .link {
@@ -44,6 +53,7 @@
   text-transform: uppercase;
   color: var(--ink);
   opacity: 0.55;
+  text-decoration: none;
   transition: opacity 0.2s;
 }
 
@@ -52,7 +62,7 @@
 }
 
 /* ==========================================
-   DESKTOP TRANSLATION SWITCHER STYLES
+    DESKTOP TRANSLATION SWITCHER STYLES
    ========================================== */
 .langSwitchDesktop {
   display: flex;
@@ -73,7 +83,7 @@
   transition: opacity 0.2s;
 }
 
-.langBtn:hover, 
+.langBtn:hover,
 .langActive {
   opacity: 1;
 }
@@ -90,6 +100,9 @@
   flex-direction: column;
   gap: 5px;
   padding: 4px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
   z-index: 101;
 }
 
@@ -101,16 +114,24 @@
   transition: transform 0.3s, opacity 0.3s;
 }
 
-.barOpen1 { transform: translateY(6.5px) rotate(45deg); }
-.barOpen2 { opacity: 0; }
-.barOpen3 { transform: translateY(-6.5px) rotate(-45deg); }
+.barOpen1 {
+  transform: translateY(6.5px) rotate(45deg);
+}
+.barOpen2 {
+  opacity: 0;
+}
+.barOpen3 {
+  transform: translateY(-6.5px) rotate(-45deg);
+}
 
-/* Mobile drawer */
+/* Mobile drawer with premium glass styling */
 .drawer {
   position: fixed;
   inset: 0;
   z-index: 99;
-  background: var(--cream);
+  background: rgba(245, 242, 237, 0.95);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   display: flex;
   flex-direction: column; /* Organizes links on top, switcher on bottom */
   align-items: center;
@@ -129,6 +150,9 @@
   flex-direction: column;
   gap: 2rem;
   text-align: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .drawerLink {
@@ -137,6 +161,7 @@
   letter-spacing: -0.02em;
   color: var(--ink);
   opacity: 0.85;
+  text-decoration: none;
   transition: opacity 0.2s, color 0.2s;
 }
 
@@ -146,7 +171,7 @@
 }
 
 /* ==========================================
-   MOBILE TRANSLATION SWITCHER STYLES
+    MOBILE TRANSLATION SWITCHER STYLES
    ========================================== */
 .langSwitchMobile {
   display: flex;
@@ -168,7 +193,7 @@
   font-family: var(--sans, sans-serif);
 }
 
-.langBtnMobile:active, 
+.langBtnMobile:active,
 .langActiveMobile {
   opacity: 1;
 }
@@ -183,6 +208,9 @@
   position: fixed;
   inset: 0;
   z-index: 98;
+  background: rgba(15, 23, 42, 0.3);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
 }
 
 @media (max-width: 768px) {
