@@ -34,6 +34,15 @@ const projects = [
     image: '/images/grace.jpg',
   },
   {
+    name: 'Drift Car Rentals',
+    type: 'Web',
+    year: '2026',
+    country: 'UAE',
+    desc: 'A game and website for car rental company in Dubai.',
+    link: 'https://drift-rentals-ecru.vercel.app/',
+    image: '/images/drift.png',
+  },
+  {
     name: 'Music Party',
     type: 'Poster',
     year: '2023',
@@ -124,7 +133,7 @@ const projects = [
   {
     name: 'Blossom Flowers',
     type: 'Web',
-    year: '2024',
+    year: '2022',
     country: 'Qatar',
     desc: 'Bespoke digital storefront for an artisan boutique.',
     link: 'https://vandradur.github.io/blossom/',
