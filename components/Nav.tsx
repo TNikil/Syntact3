@@ -126,7 +126,7 @@ export default function Nav() {
           </ul>
 
           {/* Main Desktop Language Controls */}
-
+          {/* 
           <div className={styles.langSwitchDesktop}>
             <button
               className={`${styles.langBtn} ${
@@ -148,6 +148,7 @@ export default function Nav() {
               AR
             </button>
           </div>
+           */}
         </div>
 
         {/* Mobile hamburger */}
@@ -189,7 +190,7 @@ export default function Nav() {
         </ul>
 
         {/* Bottom anchor language toggle inside mobile display */}
-
+        {/* 
         <div className={styles.langSwitchMobile}>
           <button
             className={`${styles.langBtnMobile} ${
@@ -217,6 +218,7 @@ export default function Nav() {
             AR
           </button>
         </div>
+          */}
       </div>
 
       {menuOpen && <div className={styles.overlay} onClick={closeMenu} />}
