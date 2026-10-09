@@ -5,7 +5,18 @@ import { useState } from 'react';
 import Image from 'next/image';
 import styles from './Work.module.css';
 
-const projects = [
+interface Project {
+  name: string;
+  type: string;
+  year: string;
+  country: string;
+  desc: string;
+  link?: string;
+  image?: string;
+  video?: string;
+}
+
+const projects: Project[] = [
   {
     name: 'Danpest',
     type: 'Web',
@@ -34,6 +45,15 @@ const projects = [
     image: '/images/grace.jpg',
   },
   {
+    name: 'Plaka Cafe',
+    type: 'Web',
+    year: '2024',
+    country: 'UAE',
+    desc: 'Ecommerce coffee website',
+    link: 'https://www.plakacafe.com/',
+    image: '/images/plaka.png',
+  },
+  {
     name: 'Drift Car Rentals',
     type: 'Web',
     year: '2026',
@@ -48,6 +68,7 @@ const projects = [
     year: '2023',
     country: 'Sri Lanka',
     desc: 'Bold event poster series for an underground collective.',
+
     image: '/images/music-party.jpg',
   },
   {
@@ -163,22 +184,85 @@ const projects = [
     desc: 'Market product for eco items',
     image: '/images/ecosouq.jpg',
   },
+  {
+    name: 'Chair 01',
+    type: '3D',
+    year: '2023',
+    country: 'UAE',
+    desc: 'Product Visualization for furniture company in Dubai.',
+    video: '/videos/classic_chair.mp4',
+  },
+  {
+    name: 'Chair 02',
+    type: '3D',
+    year: '2023',
+    country: 'UAE',
+    desc: 'Product Visualization for furniture company in Dubai.',
+    video: '/videos/common_chair.mp4',
+  },
+  {
+    name: 'Chair 03',
+    type: '3D',
+    year: '2023',
+    country: 'UAE',
+    desc: 'Product Visualization for furniture company in Dubai.',
+    video: '/videos/comfi_chair.mp4',
+  },
+  {
+    name: 'Chair 04',
+    type: '3D',
+    year: '2023',
+    country: 'UAE',
+    desc: 'Product Visualization for furniture company in Dubai.',
+    video: '/videos/wood_chair.mp4',
+  },
+  {
+    name: 'Chair 05',
+    type: '3D',
+    year: '2023',
+    country: 'UAE',
+    desc: 'Product Visualization for furniture company in Dubai.',
+    video: '/videos/boss_chair.mp4',
+  },
+  {
+    name: 'Chair 06',
+    type: '3D',
+    year: '2023',
+    country: 'UAE',
+    desc: 'Product Visualization for furniture company in Dubai.',
+    video: '/videos/red_chair.mp4',
+  },
+  {
+    name: 'Chair 07',
+    type: '3D',
+    year: '2023',
+    country: 'UAE',
+    desc: 'Product Visualization for furniture company in Dubai.',
+    video: '/videos/brown_chair.mp4',
+  },
 ];
 
-const filters = ['Web', 'Logo', 'Poster', 'Flyer', 'Packaging'];
+const filters = ['Web', '3D', 'Packaging', 'Logo', 'Poster', 'Flyer'];
 
 export default function Work() {
   const [active, setActive] = useState('Web');
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [selectedMedia, setSelectedMedia] = useState<{
+    src: string;
+    type: 'image' | 'video';
+  } | null>(null);
 
   const filtered = projects.filter(
     (p) => p.type.toLowerCase() === active.toLowerCase(),
   );
 
-  const handleImageClick = (e: React.MouseEvent, imgSrc: string) => {
+  const handleMediaClick = (
+    e: React.MouseEvent,
+    src: string,
+    type: 'image' | 'video',
+  ) => {
     e.preventDefault();
     e.stopPropagation();
-    setSelectedImage(imgSrc);
+    setSelectedMedia({ src, type });
   };
 
   return (
@@ -231,17 +315,36 @@ export default function Work() {
                 </div>
               </div>
 
+              {/* Media Preview (Supports both Videos & Images natively with square 1080x1080 styling) */}
               <div
                 className={styles.imagePreview}
-                onClick={(e) => handleImageClick(e, p.image)}
+                onClick={(e) => {
+                  if (p.video) {
+                    handleMediaClick(e, p.video, 'video');
+                  } else if (p.image) {
+                    handleMediaClick(e, p.image, 'image');
+                  }
+                }}
               >
-                <Image
-                  src={p.image}
-                  alt={p.name}
-                  width={400}
-                  height={250}
-                  className={styles.projectImage}
-                />
+                {p.video ? (
+                  <video
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className={styles.projectVideo}
+                  >
+                    <source src={p.video} type="video/mp4" />
+                  </video>
+                ) : p.image ? (
+                  <Image
+                    src={p.image}
+                    alt={p.name}
+                    width={400}
+                    height={250}
+                    className={styles.projectImage}
+                  />
+                ) : null}
               </div>
 
               <div className={styles.itemRight}>
@@ -258,10 +361,11 @@ export default function Work() {
         })}
       </div>
 
-      {selectedImage && (
+      {/* Zoom Modal Viewer */}
+      {selectedMedia && (
         <div
           className={styles.modalOverlay}
-          onClick={() => setSelectedImage(null)}
+          onClick={() => setSelectedMedia(null)}
         >
           <div
             className={styles.modalContent}
@@ -269,18 +373,39 @@ export default function Work() {
           >
             <button
               className={styles.closeButton}
-              onClick={() => setSelectedImage(null)}
+              onClick={() => setSelectedMedia(null)}
             >
               &times;
             </button>
-            <div className={styles.modalImageWrapper}>
-              <Image
-                src={selectedImage}
-                alt="Project preview display"
-                fill
-                sizes="85vw"
-                className={styles.modalImage}
-              />
+            <div className={styles.modalMediaWrapper}>
+              {selectedMedia.type === 'video' ? (
+                <video
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  controls
+                  className={styles.modalMedia}
+                >
+                  <source src={selectedMedia.src} type="video/mp4" />
+                </video>
+              ) : (
+                <div
+                  style={{
+                    position: 'relative',
+                    width: '100%',
+                    height: '100%',
+                  }}
+                >
+                  <Image
+                    src={selectedMedia.src}
+                    alt="Project preview display zoomed"
+                    fill
+                    sizes="85vw"
+                    className={styles.modalMedia}
+                  />
+                </div>
+              )}
             </div>
           </div>
         </div>
