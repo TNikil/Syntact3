@@ -2,10 +2,7 @@
 'use client';
 
 import styles from './HeroNew.module.css';
-import TestCanvas from '../components/TestCanvas';
-import Model from '../components/Model';
 import { motion, Variants } from 'framer-motion';
-import { Environment } from '@react-three/drei';
 
 const fadeUpVariants: Variants = {
   hidden: { opacity: 0, y: 24 },
@@ -15,58 +12,17 @@ const fadeUpVariants: Variants = {
 export default function HeroNew() {
   return (
     <section className={styles.hero}>
-      {/* 1. Full-Screen 3D Model Background */}
-      <div className={styles.canvasBackground}>
-        <TestCanvas
-          cameraPosition={[0, 0, 6]}
-          cameraFov={25}
-          exposure={0.85}
-          toneMapping={4} // ACESFilmic for striking contrast
-          controls={true}
-        >
-          {/* Pitch-dark environment preset with minimal bleed */}
-          <Environment
-            preset="night"
-            background={false}
-            environmentIntensity={0.05}
-          />
-
-          {/* Minimal ambient light so unlit areas stay completely black */}
-          <ambientLight intensity={0.83} />
-
-          {/* --- ONLY THE BLUE THEATER SPOTLIGHT --- */}
-          <spotLight
-            position={[2, 4, 3]}
-            angle={0.45}
-            penumbra={0.9}
-            intensity={180}
-            color="#416e92"
-            distance={15}
-            castShadow
-          />
-
-          {/* Optional subtle rim backlight for edge separation */}
-          <spotLight
-            position={[-2, 4, -3]}
-            angle={0.6}
-            penumbra={1}
-            intensity={40}
-            color="#ea8b4c"
-          />
-
-          {/* The 3D Model with Dual Slow-Motion Videos */}
-          <Model
-            scale={0.4}
-            tvVideoUrl="/videos/sample_2.mp4"
-            tvTwoVideoUrl="/videos/sample.mp4"
-            playbackRate={0.3}
-            tvMuted={true}
-            tvLoop={true}
-          />
-        </TestCanvas>
+      {/* 1. Full-Screen Video Background */}
+      <div className={styles.videoBackground}>
+        <video autoPlay muted loop playsInline className={styles.bgVideo}>
+          <source src="/videos/sample_3.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        {/* Dark overlay for contrast and readability */}
+        <div className={styles.videoOverlay} />
       </div>
 
-      {/* 2. Glassmorphism Content Overlay Layer on top of the 3D Model */}
+      {/* 2. Glassmorphism Content Overlay Layer on top of the Video */}
       <div className={styles.innerOverlay}>
         <div className={styles.glassCard}>
           <motion.p
