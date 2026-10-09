@@ -32,13 +32,6 @@ const team = [
     image: '/team/hector.jpg',
     linkedin: 'https://linkedin.com/in/hector',
   },
-  {
-    initials: 'EB',
-    name: 'Eranga Balasingham',
-    role: 'Graphic Designer',
-    image: '/team/eranga.jpg',
-    linkedin: 'https://linkedin.com/in/eranga',
-  },
 ];
 
 export default function About() {
