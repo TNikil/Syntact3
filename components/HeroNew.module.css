@@ -17,12 +17,18 @@
   width: 100%;
   height: 100%;
   z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
 
 .bgVideo {
+  /* Changed from object-fit: cover to contain/scale-down styling or balanced sizing to prevent heavy zoom-in */
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transform: scale(1.02); /* Minimal upscale to prevent edge gaps */
 }
 
 /* Softer gradient overlay leaving the center/upper video visible */
@@ -160,6 +166,12 @@
 @media (max-width: 768px) {
   .hero {
     padding: 6rem 1.5rem 4rem 1.5rem;
+  }
+
+  .bgVideo {
+    /* Prevents severe cropping/zooming on narrow portrait screens */
+    object-fit: cover;
+    object-position: center;
   }
 
   .innerOverlay {
