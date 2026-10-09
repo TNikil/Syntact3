@@ -18,21 +18,23 @@ export default function HeroNew() {
           <source src="/videos/sample_3.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
-        {/* Dark overlay for contrast and readability */}
+        {/* Softer gradient vignette to keep video visible */}
         <div className={styles.videoOverlay} />
       </div>
 
-      {/* 2. Glassmorphism Content Overlay Layer on top of the Video */}
+      {/* 2. Airy Content Layer */}
       <div className={styles.innerOverlay}>
-        <div className={styles.glassCard}>
-          <motion.p
-            className={styles.tag}
+        <div className={styles.contentWrapper}>
+          <motion.div
+            className={styles.tagWrapper}
             initial="hidden"
             animate="visible"
             variants={fadeUpVariants}
           >
-            Web Dev &amp; Graphic Design Agency
-          </motion.p>
+            <span className={styles.tag}>
+              Web Dev &amp; Graphic Design Agency
+            </span>
+          </motion.div>
 
           <motion.h1
             className={styles.headline}
@@ -48,30 +50,26 @@ export default function HeroNew() {
             <em className={styles.accent}>WE DELIVER.</em>
           </motion.h1>
 
-          <motion.p
-            className={styles.desc}
+          <motion.div
+            className={styles.bottomSplit}
             initial="hidden"
             animate="visible"
             variants={fadeUpVariants}
             transition={{ delay: 0.2 }}
           >
-            Syntac3 is a creative Agency crafting bold digital experiences —
-            from pixel-perfect designs to powerful web builds.
-          </motion.p>
+            <p className={styles.desc}>
+              Syntac3 is a creative Agency crafting bold digital experiences —
+              from pixel-perfect designs to powerful web builds.
+            </p>
 
-          <motion.div
-            className={styles.cta}
-            initial="hidden"
-            animate="visible"
-            variants={fadeUpVariants}
-            transition={{ delay: 0.3 }}
-          >
-            <a href="#services" className={styles.btnPrimary}>
-              Our Services
-            </a>
-            <a href="#contact" className={styles.btnGhost}>
-              Get In Touch →
-            </a>
+            <div className={styles.cta}>
+              <a href="#services" className={styles.btnPrimary}>
+                Our Services
+              </a>
+              <a href="#contact" className={styles.btnGhost}>
+                Get In Touch →
+              </a>
+            </div>
           </motion.div>
         </div>
       </div>

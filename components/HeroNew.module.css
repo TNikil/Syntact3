@@ -6,11 +6,11 @@
   position: relative;
   overflow: hidden;
   display: flex;
-  align-items: center;
+  align-items: flex-end; /* Anchors text nicely towards the lower half */
   background: var(--ink);
+  padding-bottom: 6rem;
 }
 
-/* --- Full-Screen Video Background Styles --- */
 .videoBackground {
   position: absolute;
   inset: 0;
@@ -25,72 +25,44 @@
   object-fit: cover;
 }
 
+/* Softer gradient overlay leaving the center/upper video visible */
 .videoOverlay {
   position: absolute;
   inset: 0;
-  background: rgba(
-    10,
-    15,
-    30,
-    0.65
-  ); /* Adjust opacity to make background video darker/lighter */
+  background: linear-gradient(
+    to top,
+    rgba(10, 15, 30, 0.85) 10%,
+    rgba(10, 15, 30, 0.35) 50%,
+    rgba(10, 15, 30, 0.2) 100%
+  );
   z-index: 2;
 }
 
-/* --- Glassmorphism Overlay Container --- */
 .innerOverlay {
   position: relative;
   z-index: 3;
   width: 100%;
   max-width: 1440px;
   margin: 0 auto;
-  padding: 0 3rem;
-  display: flex;
-  align-items: center;
+  padding: 0 4rem;
 }
 
-.glassCard {
-  background: rgba(15, 23, 42, 0.45); /* Deep dark frosted glass tint */
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+.contentWrapper {
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+}
+
+.tagWrapper {
+  display: inline-block;
+  background: rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 24px;
-  padding: 3.5rem;
-  max-width: 620px;
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
-  display: flex;
-  flex-direction: column;
-}
-
-/* --- Mobile Setup --- */
-@media (max-width: 768px) {
-  .hero {
-    min-height: 100vh;
-    padding: 2rem 1rem;
-  }
-
-  .innerOverlay {
-    padding: 0 1rem;
-  }
-
-  .glassCard {
-    padding: 2rem;
-    max-width: 100%;
-  }
-
-  .desc {
-    font-size: 0.95rem;
-  }
-
-  .cta {
-    gap: 1rem;
-  }
-}
-
-/* --- Typography --- */
-.contentSide {
-  display: flex;
-  flex-direction: column;
+  padding: 0.5rem 1.2rem;
+  border-radius: 9999px;
+  width: fit-content;
+  margin-bottom: 2rem;
 }
 
 .tag {
@@ -98,18 +70,16 @@
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--accent);
-  margin-bottom: 1.8rem;
-  animation: fadeUp 0.8s ease both;
 }
 
 .headline {
   font-family: 'Bahnschrift', sans-serif;
-  font-size: clamp(3.2rem, 7vw, 6.5rem);
+  font-size: clamp(3rem, 7vw, 6.5rem);
   line-height: 0.87;
   letter-spacing: 0.01em;
-  margin-bottom: 2rem;
-  animation: fadeUp 0.8s 0.1s ease both;
+  margin-bottom: 2.5rem;
   color: var(--cream);
+  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
 .accent {
@@ -117,22 +87,28 @@
   color: var(--accent);
 }
 
+.bottomSplit {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 3rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  padding-top: 2rem;
+}
+
 .desc {
-  font-size: clamp(1.1rem, 2vw, 1.4rem);
-  line-height: 1.2;
-  max-width: 480px;
-  margin-bottom: 2.8rem;
-  animation: fadeUp 0.8s 0.2s ease both;
-  font-family: 'Bahnschrift', sans-serif;
-  color: var(--cream);
+  font-size: 1.05rem;
+  line-height: 1.5;
+  max-width: 400px;
+  color: rgba(245, 242, 237, 0.85);
+  margin: 0;
 }
 
 .cta {
   display: flex;
   gap: 1.5rem;
   align-items: center;
-  flex-wrap: wrap;
-  animation: fadeUp 0.8s 0.3s ease both;
+  flex-shrink: 0;
 }
 
 .btnPrimary {
@@ -142,24 +118,26 @@
   font-size: 0.78rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  transition: background 0.25s;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   display: inline-block;
   border: none;
   cursor: pointer;
   text-decoration: none;
-  border-radius: 4px;
+  border-radius: 9999px;
 }
 
 .btnPrimary:hover {
   background: var(--accent);
+  color: var(--cream);
+  transform: translateY(-2px);
 }
 
 .btnGhost {
   font-size: 0.78rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--accent);
-  opacity: 0.55;
+  color: var(--cream);
+  opacity: 0.7;
   transition: opacity 0.2s;
   display: flex;
   align-items: center;
@@ -167,23 +145,45 @@
   text-decoration: none;
 }
 
-.btnGhost::after {
-  content: '→';
-  font-size: 1rem;
-}
-
 .btnGhost:hover {
   opacity: 1;
 }
 
-/* --- Animations --- */
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(24px);
+@media (max-width: 1024px) {
+  .bottomSplit {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 6rem 1.5rem 4rem 1.5rem;
+  }
+
+  .innerOverlay {
+    padding: 0;
+  }
+
+  .headline {
+    font-size: clamp(2.8rem, 12vw, 4.2rem);
+    margin-bottom: 2rem;
+  }
+
+  .desc {
+    font-size: 0.95rem;
+  }
+
+  .cta {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+
+  .btnPrimary {
+    width: 100%;
+    padding: 1rem;
   }
 }
