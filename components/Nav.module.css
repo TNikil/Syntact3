@@ -215,7 +215,7 @@
     padding: 1.2rem 1.5rem;
   }
 
-  /* Hides the desktop navigation container on small devices */
+  /* Hides the desktop navigation on small devices */
   .navRight {
     display: none;
   }
