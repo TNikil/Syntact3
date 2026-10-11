@@ -189,7 +189,7 @@ export default function Nav() {
           ))}
         </ul>
 
-        {/* Bottom anchor language toggle inside mobile display */}
+        {/* Bottom anchor toggle inside mobile display */}
         {/* 
         <div className={styles.langSwitchMobile}>
           <button
