@@ -6,8 +6,7 @@ import styles from './About.module.css';
 const stats = [
   { num: '50+', label: 'Projects Completed' },
   { num: '100%', label: 'Satisfaction Rate' },
-  { num: '4', label: 'Creative Minds' },
-  { num: '3+', label: 'Years of Excellence' },
+  { num: '23+', label: 'Years of Excellence' },
 ];
 
 const team = [
