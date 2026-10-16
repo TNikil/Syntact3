@@ -272,6 +272,14 @@ const projects: Project[] = [
     desc: 'Product Visualization for furniture company.',
     video: '/videos/michel.mp4',
   },
+  {
+    name: 'Table 01',
+    type: '3D',
+    year: '2023',
+    country: 'UK',
+    desc: 'Product Visualization for furniture company.',
+    video: '/videos/table.mp4',
+  },
 ];
 
 const filters = ['Web', '3D', 'Packaging', 'Logo', 'Poster', 'Flyer'];
