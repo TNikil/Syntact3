@@ -98,7 +98,7 @@ const projects: Project[] = [
   {
     name: 'Crevox',
     type: 'Logo',
-    year: '2023',
+    year: '2016',
     country: 'Sri Lanka',
     desc: 'Spices packaging company',
     image: '/images/cervox_logo.jpg',
@@ -114,7 +114,7 @@ const projects: Project[] = [
   {
     name: 'Thaya floral and gourmet',
     type: 'Logo',
-    year: '2017',
+    year: '2012',
     country: 'UAE',
     desc: 'Flower, events and landscaping company',
     image: '/images/thaya_logo.jpg',
@@ -154,7 +154,7 @@ const projects: Project[] = [
   {
     name: 'Blossom Flowers',
     type: 'Web',
-    year: '2022',
+    year: '2012',
     country: 'Qatar',
     desc: 'Bespoke digital storefront for an artisan boutique.',
     link: 'https://vandradur.github.io/blossom/',
@@ -163,8 +163,8 @@ const projects: Project[] = [
   {
     name: 'Crevox Spices',
     type: 'Packaging',
-    year: '2023',
-    country: 'USA',
+    year: '2016',
+    country: 'Sri Lanka',
     desc: 'Custom packaging for US based spices company.',
     image: '/images/cervox.jpg',
   },

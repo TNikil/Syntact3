@@ -98,11 +98,13 @@
 }
 
 .desc {
-  font-size: 1.05rem;
-  line-height: 1.5;
+  font-size: 0.95rem;
+  line-height: 1.3;
   max-width: 400px;
   color: rgba(245, 242, 237, 0.85);
   margin: 0;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
 }
 
 .cta {

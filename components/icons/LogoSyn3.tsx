@@ -24,7 +24,7 @@ export default function LogoSync3({ className }: LogoNameProps) {
         d="M16.718.799v.224h.803v.437a.1.1 0 0 1-.033.08.1.1 0 0 1-.08.032h-.455a.1.1 0 0 0-.08.034.1.1 0 0 0-.033.079q0 .048.032.08.034.033.081.033h.453q.047 0 .08.034a.1.1 0 0 1 .033.08v.44h-.794l-.007.001v.224h.803a.22.22 0 0 0 .162-.065.22.22 0 0 0 .066-.16v-.44a.33.33 0 0 0-.093-.227q.09-.09.09-.239v-.423a.22.22 0 0 0-.065-.158.22.22 0 0 0-.16-.066z"
         style={{
           color: '#000',
-          fill: '#394828',
+          fill: '#e4ecdb',
           strokeLinecap: 'square',
         }}
       />
@@ -32,7 +32,7 @@ export default function LogoSync3({ className }: LogoNameProps) {
         d="M16.77.85h.751q.075-.002.125.05c.036.035.05.073.05.123v.424a.27.27 0 0 1-.075.203l-.034.033.032.035c.056.063.08.126.08.196v.44a.16.16 0 0 1-.05.122.17.17 0 0 1-.128.051h-.752v-.125h.8v-.488a.17.17 0 0 0-.048-.115.16.16 0 0 0-.115-.051h-.453c-.02 0-.031-.006-.045-.02a.05.05 0 0 1-.018-.043c0-.02.005-.032.018-.045.014-.014.025-.017.045-.017h.457a.17.17 0 0 0 .113-.047.17.17 0 0 0 .049-.117V.974h-.803z"
         style={{
           color: '#000',
-          fill: '#394828',
+          fill: '#e4ecdb',
           strokeLinecap: 'square',
         }}
       />
@@ -40,7 +40,7 @@ export default function LogoSync3({ className }: LogoNameProps) {
         d="M14.297.773v.311h.634v2.112h.376V1.084h.632V.773z"
         style={{
           color: '#000',
-          fill: '#394828',
+          fill: '#e4ecdb',
           strokeLinecap: 'square',
         }}
       />
@@ -48,7 +48,7 @@ export default function LogoSync3({ className }: LogoNameProps) {
         d="M10.502.773l-.824 2.423h.402l.161-.53h.853l.16.53h.405L10.834.773zm.166.483.332 1.1h-.665z"
         style={{
           color: '#000',
-          fill: '#394828',
+          fill: '#e4ecdb',
           strokeLinecap: 'square',
         }}
       />
@@ -56,7 +56,7 @@ export default function LogoSync3({ className }: LogoNameProps) {
         d="M7.717.773v.311h.634v2.112h.376V1.084h.632V.773z"
         style={{
           color: '#000',
-          fill: '#394828',
+          fill: '#e4ecdb',
           strokeLinecap: 'square',
         }}
       />
@@ -64,7 +64,7 @@ export default function LogoSync3({ className }: LogoNameProps) {
         d="M5.258.773v2.421h.365V1.462l.99 1.732h.338V.773h-.364v1.77L5.594.773z"
         style={{
           color: '#000',
-          fill: '#394828',
+          fill: '#e4ecdb',
           strokeLinecap: 'square',
         }}
       />
@@ -72,7 +72,7 @@ export default function LogoSync3({ className }: LogoNameProps) {
         d="M2.902.773l.695 1.423v1h.375v-1L4.657.773h-.401l-.471 1.066L3.303.773z"
         style={{
           color: '#000',
-          fill: '#394828',
+          fill: '#e4ecdb',
           strokeLinecap: 'square',
         }}
       />
@@ -90,7 +90,7 @@ export default function LogoSync3({ className }: LogoNameProps) {
           fill: ['#ff0000', '#ff4444', '#ff0000', '#ff4444', '#ff0000'],
         }}
         transition={{
-          duration: 1.5,
+          duration: 45.5,
           repeat: Infinity,
           ease: 'easeInOut',
           times: [0, 0.2, 0.4, 0.6, 0.8, 1],
@@ -102,7 +102,7 @@ export default function LogoSync3({ className }: LogoNameProps) {
         d="M12.976.748a.9.9 0 0 0-.426.091.65.65 0 0 0-.276.262.8.8 0 0 0-.098.405v.958a.8.8 0 0 0 .098.404q.098.17.276.261.18.092.426.092.24 0 .409-.083a.63.63 0 0 0 .269-.245.86.86 0 0 0 .116-.394h-.381a.45.45 0 0 1-.13.3.4.4 0 0 1-.283.102.4.4 0 0 1-.305-.117.44.44 0 0 1-.113-.32v-.958q0-.203.113-.32a.4.4 0 0 1 .305-.118q.117 0 .204.046a.36.36 0 0 1 .142.137.5.5 0 0 1 .067.218h.381a.86.86 0 0 0-.116-.393.63.63 0 0 0-.269-.245.9.9 0 0 0-.409-.083"
         style={{
           color: '#000',
-          fill: '#394828',
+          fill: '#e4ecdb',
           strokeLinecap: 'square',
         }}
       />
@@ -112,7 +112,7 @@ export default function LogoSync3({ className }: LogoNameProps) {
         d="M1.608.748q-.393 0-.607.165a.55.55 0 0 0-.214.468v.072a.6.6 0 0 0 .065.297.5.5 0 0 0 .174.183q.109.067.239.106.131.04.26.072.131.033.244.074a.5.5 0 0 1 .181.106.24.24 0 0 1 .069.184v.111q0 .154-.12.238a.6.6 0 0 1-.342.084.52.52 0 0 1-.304-.085.45.45 0 0 1-.17-.249l-.36.127q.045.166.156.283.113.117.284.177.172.06.394.06.4 0 .618-.165a.55.55 0 0 0 .218-.468V2.47a.57.57 0 0 0-.063-.285.5.5 0 0 0-.164-.178.9.9 0 0 0-.226-.109 4 4 0 0 0-.246-.07 6 6 0 0 1-.261-.076.5.5 0 0 1-.197-.107.25.25 0 0 1-.075-.19v-.08q0-.15.117-.232a.56.56 0 0 1 .33-.083q.146 0 .248.082.105.08.151.235l.351-.13a.64.64 0 0 0-.261-.372.86.86 0 0 0-.489-.128"
         style={{
           color: '#000',
-          fill: '#394828',
+          fill: '#e4ecdb',
           strokeLinecap: 'square',
         }}
       />
