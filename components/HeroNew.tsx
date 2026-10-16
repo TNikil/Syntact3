@@ -5,9 +5,25 @@ import { useRef, useEffect } from 'react';
 import styles from './HeroNew.module.css';
 import { motion, Variants } from 'framer-motion';
 
-const fadeUpVariants: Variants = {
-  hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
+// Longer cinematic delay so the video plays fully before text appears
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.3,
+      delayChildren: 1.2, // 1.2s pure video showcase before text starts fading in
+    },
+  },
+};
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 35 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1] },
+  },
 };
 
 export default function HeroNew() {
@@ -15,14 +31,13 @@ export default function HeroNew() {
 
   useEffect(() => {
     if (videoRef.current) {
-      // Sets the video playback rate to slow motion (e.g., 0.5x speed)
-      videoRef.current.playbackRate = 0.5;
+      videoRef.current.playbackRate = 0.5; // Slow motion
     }
   }, []);
 
   return (
     <section className={styles.hero}>
-      {/* 1. Full-Screen Video Background with Slow Motion & Object-Fit Contain adjustments */}
+      {/* 1. Absolute Full-Screen Video Background */}
       <div className={styles.videoBackground}>
         <video
           ref={videoRef}
@@ -35,31 +50,25 @@ export default function HeroNew() {
           <source src="/videos/sample_3.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
-        {/* Soft gradient vignette to keep video visible */}
+        {/* Subtle cinematic vignette */}
         <div className={styles.videoOverlay} />
       </div>
 
-      {/* 2. Airy Content Layer */}
-      <div className={styles.innerOverlay}>
+      {/* 2. Delayed Cinematic Content Layer */}
+      <motion.div
+        className={styles.innerOverlay}
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
         <div className={styles.contentWrapper}>
-          <motion.div
-            className={styles.tagWrapper}
-            initial="hidden"
-            animate="visible"
-            variants={fadeUpVariants}
-          >
+          <motion.div variants={itemVariants} className={styles.tagWrapper}>
             <span className={styles.tag}>
               Web Dev &amp; Graphic Design Agency
             </span>
           </motion.div>
 
-          <motion.h1
-            className={styles.headline}
-            initial="hidden"
-            animate="visible"
-            variants={fadeUpVariants}
-            transition={{ delay: 0.1 }}
-          >
+          <motion.h1 variants={itemVariants} className={styles.headline}>
             WE DESIGN.
             <br />
             WE BUILD.
@@ -67,13 +76,7 @@ export default function HeroNew() {
             <em className={styles.accent}>WE DELIVER.</em>
           </motion.h1>
 
-          <motion.div
-            className={styles.bottomSplit}
-            initial="hidden"
-            animate="visible"
-            variants={fadeUpVariants}
-            transition={{ delay: 0.2 }}
-          >
+          <motion.div variants={itemVariants} className={styles.bottomSplit}>
             <p className={styles.desc}>
               Syntac3 is a creative Agency crafting bold digital experiences —
               from pixel-perfect designs to powerful web builds.
@@ -89,7 +92,7 @@ export default function HeroNew() {
             </div>
           </motion.div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }
