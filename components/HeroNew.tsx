@@ -3,41 +3,64 @@
 
 import { useRef, useEffect } from 'react';
 import styles from './HeroNew.module.css';
-import { motion, Variants } from 'framer-motion';
+import { motion, useReducedMotion, type Variants } from 'framer-motion';
+import AnimatedText from '@/components/AnimatedText';
 
-// Longer cinematic delay so the video plays fully before text appears
+const ease = [0.16, 1, 0.3, 1] as const;
+
+// Container orchestrates timing; children fire in sequence.
+// Delay down from 1.2s so text starts within the first second.
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.3,
-      delayChildren: 1.2, // 1.2s pure video showcase before text starts fading in
+      staggerChildren: 0.12,
+      delayChildren: 0.6,
     },
   },
 };
 
-const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 35 },
+const tagVariants: Variants = {
+  hidden: { opacity: 0, y: 16 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1] },
+    transition: { duration: 0.7, ease },
+  },
+};
+
+const descVariants: Variants = {
+  hidden: { opacity: 0, y: 18 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.75, ease, delay: 0.15 },
+  },
+};
+
+const ctaVariants: Variants = {
+  hidden: { opacity: 0, y: 18 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.75, ease, delay: 0.25 },
   },
 };
 
 export default function HeroNew() {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const prefersReduced = useReducedMotion();
 
   useEffect(() => {
     if (videoRef.current) {
-      videoRef.current.playbackRate = 0.5; // Slow motion
+      videoRef.current.playbackRate = 0.5;
     }
   }, []);
 
   return (
     <section className={styles.hero}>
-      {/* 1. Absolute Full-Screen Video Background */}
+      {/* 1. Absolute Full-Screen Video Background — unchanged */}
       <div className={styles.videoBackground}>
         <video
           ref={videoRef}
@@ -50,46 +73,69 @@ export default function HeroNew() {
           <source src="/videos/sample_3.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
-        {/* Subtle cinematic vignette */}
         <div className={styles.videoOverlay} />
       </div>
 
-      {/* 2. Delayed Cinematic Content Layer */}
+      {/* 2. Sequenced Content Layer */}
       <motion.div
         className={styles.innerOverlay}
         variants={containerVariants}
-        initial="hidden"
+        initial={prefersReduced ? 'visible' : 'hidden'}
         animate="visible"
       >
         <div className={styles.contentWrapper}>
-          <motion.div variants={itemVariants} className={styles.tagWrapper}>
+          <motion.div variants={tagVariants} className={styles.tagWrapper}>
             <span className={styles.tag}>
               Web Dev &amp; Graphic Design Agency
             </span>
           </motion.div>
 
-          <motion.h1 variants={itemVariants} className={styles.headline}>
-            WE DESIGN.
+          {/* Three locked lines, each word-cascades. Same <br> layout,
+              same <h1>, same italic accent — only the animation changed. */}
+          <h1 className={styles.headline}>
+            <AnimatedText
+              text="WE DESIGN."
+              wordDelay={0.08}
+              delay={0.15}
+              maskPadY={0.22}
+              maskPadX={0.06}
+            />
             <br />
-            WE BUILD.
+            <AnimatedText
+              text="WE BUILD."
+              wordDelay={0.08}
+              delay={0.35}
+              maskPadY={0.22}
+              maskPadX={0.06}
+            />
             <br />
-            <em className={styles.accent}>WE DELIVER.</em>
-          </motion.h1>
+            <AnimatedText
+              text={[
+                <em key="accent" className={styles.accent}>
+                  WE DELIVER.
+                </em>,
+              ]}
+              wordDelay={0.08}
+              delay={0.55}
+              maskPadY={0.22}
+              maskPadX={0.06}
+            />
+          </h1>
 
-          <motion.div variants={itemVariants} className={styles.bottomSplit}>
+          <motion.div variants={descVariants} className={styles.bottomSplit}>
             <p className={styles.desc}>
               Syntac3 is a creative Agency crafting bold digital experiences —
               from pixel-perfect designs to powerful web builds.
             </p>
 
-            <div className={styles.cta}>
+            <motion.div variants={ctaVariants} className={styles.cta}>
               <a href="#services" className={styles.btnPrimary}>
                 Our Services
               </a>
               <a href="#contact" className={styles.btnGhost}>
                 Get In Touch →
               </a>
-            </div>
+            </motion.div>
           </motion.div>
         </div>
       </motion.div>

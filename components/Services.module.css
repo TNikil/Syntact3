@@ -12,11 +12,11 @@
   background: rgba(15, 23, 42, 0.45);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 6px;
   padding: 3.5rem;
   margin-bottom: 4rem;
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
   max-width: 800px;
 }
 
@@ -29,15 +29,16 @@
 }
 
 .headline {
-  font-family: 'Bahnschrift', sans-serif;
+  font-family: var(--sans);
   font-size: clamp(3.2rem, 7vw, 6.5rem);
-  line-height: 0.87;
+  line-height: 0.95;
   letter-spacing: 0.01em;
   margin-bottom: 0;
   color: var(--cream);
 }
 
 .accent {
+  font-family: var(--serif);
   font-style: italic;
   color: var(--accent);
 }
@@ -46,13 +47,18 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
 }
 
 .card {
   padding: 2.5rem 2.5rem 2.5rem 0;
-  border-right: 1px solid rgba(255, 255, 255, 0.08);
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  border-right: 1px solid rgba(255, 255, 255, 0.04);
+  /* remove transform transition — Framer Motion owns transforms now */
+  transition: background 0.35s ease;
+}
+
+.card:hover {
+  background: rgba(255, 255, 255, 0.015);
 }
 
 .card:last-child {
@@ -64,18 +70,17 @@
   padding-left: 2.5rem;
 }
 
-/* Brightened up from 0.25 to 0.60 opacity so the eyes track the grid structure easily */
 .num {
   font-size: 0.72rem;
   letter-spacing: 0.18em;
   color: var(--accent);
   opacity: 0.8;
   margin-bottom: 1.5rem;
-  font-family: 'Bahnschrift', sans-serif;
+  font-family: var(--sans);
 }
 
 .cardName {
-  font-family: 'Bahnschrift', sans-serif;
+  font-family: var(--sans);
   font-size: 1.6rem;
   letter-spacing: 0.02em;
   line-height: 1.1;
@@ -83,7 +88,6 @@
   color: var(--cream);
 }
 
-/* Increased size slightly and opacity for crisp body readability */
 .cardDesc {
   font-size: 0.92rem;
   line-height: 1.7;
@@ -92,28 +96,34 @@
 }
 
 .list {
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-/* Upgraded sub-services size/weight and added a silky transition for user interaction */
 .listItem {
   font-size: 0.88rem;
   font-weight: 500;
   color: rgba(255, 255, 255, 0.4);
   padding: 0.7rem 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
   line-height: 1.5;
+  /* Framer Motion animates opacity + x — keep CSS to color/padding only */
   transition: color 0.25s ease, padding-left 0.25s ease;
   cursor: default;
 }
 
-/* Lights up to full cream brightness and nudges slightly right when hovered */
 .listItem:hover {
   color: var(--cream);
   padding-left: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .listItem {
+    transition: none !important;
+  }
 }
 
 @media (max-width: 900px) {
@@ -124,7 +134,7 @@
   .card {
     padding: 2.5rem 0;
     border-right: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
   }
 
   .card:not(:first-child) {

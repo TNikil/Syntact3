@@ -39,8 +39,8 @@
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
   padding: 4rem 3.5rem;
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
 }
@@ -49,12 +49,13 @@
   font-family: var(--serif);
   font-size: clamp(3rem, 6.5vw, 6rem);
   letter-spacing: -0.03em;
-  line-height: 1.02;
+  line-height: 1.1;
   color: var(--cream);
   margin: 0;
 }
 
 .accent {
+  font-family: var(--serif);
   font-style: italic;
   opacity: 0.9;
 }
@@ -65,7 +66,7 @@
   flex-direction: column;
   gap: 3.5rem;
   width: 100%;
-  max-width: 420px; /* Anchors the block so it doesn't over-stretch */
+  max-width: 420px;
   flex-shrink: 0;
 }
 
@@ -76,15 +77,15 @@
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
   padding: 2.5rem 2.5rem;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
 }
 
 .infoGroup {
   padding: 1.25rem 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .infoGroup:first-child {
@@ -102,7 +103,7 @@
   font-size: 0.72rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.65);
+  color: rgba(255, 255, 255, 0.7);
   display: block;
   margin-bottom: 0.4rem;
 }
@@ -118,7 +119,7 @@
 .actions {
   display: flex;
   align-items: center;
-  justify-content: flex-start; /* Aligned left inside the right block */
+  justify-content: flex-start;
   flex-shrink: 0;
 }
 
@@ -136,7 +137,9 @@
   font-family: var(--sans);
   border-radius: 100px;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  /* Scoped transition — no `all` */
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease;
   white-space: nowrap;
   text-decoration: none;
 }
@@ -157,6 +160,17 @@
   transform: translateX(4px);
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .btnWhite,
+  .btnWhite::after {
+    transition: none !important;
+  }
+
+  .btnWhite:hover {
+    transform: none;
+  }
+}
+
 @media (max-width: 900px) {
   .section {
     padding: 6rem 2rem;
@@ -174,7 +188,7 @@
   }
 
   .rightColumn {
-    max-width: 100%; /* Spans full width smoothly on tablets/mobile */
+    max-width: 100%;
     gap: 2.5rem;
   }
 

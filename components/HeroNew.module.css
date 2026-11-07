@@ -6,7 +6,7 @@
   position: relative;
   overflow: hidden;
   display: flex;
-  align-items: flex-end; /* Anchors the content gracefully toward the lower screen frame */
+  align-items: flex-end;
   background: var(--ink);
   padding-bottom: 5rem;
 }
@@ -22,11 +22,10 @@
 .bgVideo {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Perfectly adapts your 1920x1200 ratio to any screen bounds */
+  object-fit: cover;
   transform: scale(1.02);
 }
 
-/* Rich cinematic gradient vignette that keeps text readable while letting video shine */
 .videoOverlay {
   position: absolute;
   inset: 0;

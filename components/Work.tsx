@@ -5,6 +5,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { motion, useReducedMotion } from 'framer-motion';
 import styles from './Work.module.css';
+import AnimatedText from './AnimatedText';
 
 interface Project {
   name: string;
@@ -321,11 +322,16 @@ export default function Work() {
       >
         <div className={styles.header}>
           <p className={styles.tag}>Our Work</p>
-          <h2 className={styles.headline}>
-            Work we&apos;re
-            <br />
-            <em className={styles.accent}>proud of.</em>
-          </h2>
+          <AnimatedText
+            as="h2"
+            className={styles.headline}
+            text={[
+              "Work we're ",
+              <em key="accent" className={styles.accent}>
+                proud of.
+              </em>,
+            ]}
+          />
         </div>
 
         <div className={styles.filters}>

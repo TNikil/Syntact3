@@ -1,6 +1,8 @@
 // Services.tsx
 'use client';
 
+import { motion, useReducedMotion } from 'framer-motion';
+import AnimatedText from '@/components/AnimatedText';
 import styles from './Services.module.css';
 
 const services = [
@@ -43,31 +45,60 @@ const services = [
 ];
 
 export default function Services() {
+  const prefersReduced = useReducedMotion();
+
   return (
     <section className={styles.section} id="services">
       <div className={styles.glassHeaderContainer}>
         <p className={styles.tag}>What We Do</p>
-        <h2 className={styles.headline}>
-          Services built for
-          <br />
-          <em className={styles.accent}>bold brands.</em>
-        </h2>
+        <AnimatedText
+          as="h2"
+          className={styles.headline}
+          text={[
+            'Services built for ',
+            <em key="accent" className={styles.accent}>
+              bold brands.
+            </em>,
+          ]}
+        />
       </div>
 
       <div className={styles.grid}>
-        {services.map((s) => (
-          <div className={styles.card} key={s.num}>
+        {services.map((s, i) => (
+          <motion.div
+            className={styles.card}
+            key={s.num}
+            initial={prefersReduced ? false : { opacity: 0, y: 28 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{
+              duration: 0.6,
+              ease: [0.25, 1, 0.5, 1],
+              delay: prefersReduced ? 0 : i * 0.1,
+            }}
+          >
             <p className={styles.num}>{s.num}</p>
             <h3 className={styles.cardName}>{s.name}</h3>
             <p className={styles.cardDesc}>{s.desc}</p>
             <ul className={styles.list}>
-              {s.items.map((item) => (
-                <li key={item} className={styles.listItem}>
+              {s.items.map((item, j) => (
+                <motion.li
+                  key={item}
+                  className={styles.listItem}
+                  initial={prefersReduced ? false : { opacity: 0, x: -8 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: '-40px' }}
+                  transition={{
+                    duration: 0.4,
+                    ease: [0.25, 1, 0.5, 1],
+                    delay: prefersReduced ? 0 : i * 0.1 + j * 0.04,
+                  }}
+                >
                   {item}
-                </li>
+                </motion.li>
               ))}
             </ul>
-          </div>
+          </motion.div>
         ))}
       </div>
     </section>
