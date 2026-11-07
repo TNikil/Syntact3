@@ -135,7 +135,7 @@
   letter-spacing: 0.15em;
   text-transform: uppercase;
   font-family: var(--sans);
-  border-radius: 100px;
+  border-radius: 3px;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
   /* Scoped transition — no `all` */
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
