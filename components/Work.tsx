@@ -40,7 +40,7 @@ const projects: Project[] = [
   {
     name: 'Grace Flower and More',
     type: 'Web',
-    year: '2024',
+    year: '2026',
     country: 'UAE',
     desc: 'Ecommerce florist website to deal across UAE.',
     link: 'https://grace-flower-boutique-2.vercel.app/',
@@ -49,7 +49,7 @@ const projects: Project[] = [
   {
     name: 'Plaka Cafe',
     type: 'Web',
-    year: '2024',
+    year: '2026',
     country: 'UAE',
     desc: 'Ecommerce coffee website',
     link: 'https://www.plakacafe.com/',
