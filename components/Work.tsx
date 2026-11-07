@@ -43,7 +43,7 @@ const projects: Project[] = [
     year: '2024',
     country: 'UAE',
     desc: 'Ecommerce florist website to deal across UAE.',
-    link: 'https://grace-flower-boutique-2.vercel.app/bouquet/5c350175-6be2-44d4-8264-e969cbe8ff02',
+    link: 'https://grace-flower-boutique-2.vercel.app/',
     image: '/images/grace.jpg',
   },
   {
