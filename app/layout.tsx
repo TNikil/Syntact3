@@ -27,15 +27,16 @@ export default function RootLayout({
           body { top: 0px !important; }
           .goog-te-gadget { display: none !important; }
         `}</style>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
       </head>
       <body>
         {children}
-        
+
         {/* Asynchronously loads the hidden translation core */}
-       <Script
-  src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
-  strategy="afterInteractive"
-/>
+        <Script
+          src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );
