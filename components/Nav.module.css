@@ -201,6 +201,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  display: none; /* temporarily hidden — will become language selector */
 }
 
 .drawerLabel {
