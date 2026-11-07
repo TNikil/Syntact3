@@ -2,10 +2,15 @@
 'use client';
 
 import { useEffect, useState, useRef } from 'react';
+import {
+  motion,
+  AnimatePresence,
+  useReducedMotion,
+  type Variants,
+} from 'framer-motion';
 import styles from './Nav.module.css';
 import LogoSync3 from './icons/LogoSyn3';
 
-// Setup TypeScript bindings for the script window objects
 declare global {
   interface Window {
     google: any;
@@ -20,6 +25,56 @@ const links = [
   { label: 'Contact', href: '#contact' },
 ];
 
+const ease = [0.16, 1, 0.3, 1] as const;
+
+const navContainer: Variants = {
+  hidden: { opacity: 0, y: -12 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease,
+      delayChildren: 0.1,
+      staggerChildren: 0.06,
+    },
+  },
+};
+
+const navItem: Variants = {
+  hidden: { opacity: 0, y: -8 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease },
+  },
+};
+
+const overlayVariants: Variants = {
+  closed: { opacity: 0, transition: { duration: 0.25 } },
+  open: { opacity: 1, transition: { duration: 0.3 } },
+};
+
+const panelVariants: Variants = {
+  closed: {
+    x: '100%',
+    transition: { duration: 0.35, ease },
+  },
+  open: {
+    x: '0%',
+    transition: { duration: 0.45, ease },
+  },
+};
+
+const drawerLinkVariants: Variants = {
+  closed: { opacity: 0, x: 20 },
+  open: (i: number) => ({
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.4, ease, delay: 0.15 + i * 0.06 },
+  }),
+};
+
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
@@ -27,27 +82,22 @@ export default function Nav() {
   const [currentLang, setCurrentLang] = useState('en');
 
   const lastScrollY = useRef(0);
+  const prefersReduced = useReducedMotion();
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-
-      // Toggle scrolled state for glass blur intensity
       setScrolled(currentScrollY > 40);
-
-      // Hide navbar when scrolling down, show when scrolling up
       if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
         setHidden(true);
       } else {
         setHidden(false);
       }
-
       lastScrollY.current = currentScrollY;
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
 
-    // Core listener hook for Google engine setup
     window.googleTranslateElementInit = () => {
       new window.google.translate.TranslateElement(
         {
@@ -63,9 +113,29 @@ export default function Nav() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Lock body scroll while drawer open
+  useEffect(() => {
+    if (menuOpen) {
+      const prev = document.body.style.overflow;
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.body.style.overflow = prev;
+      };
+    }
+  }, [menuOpen]);
+
+  // Escape key closes drawer
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setMenuOpen(false);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [menuOpen]);
+
   const closeMenu = () => setMenuOpen(false);
 
-  // Fires the manual drop-down dispatch event for translation
   const handleTranslate = (langCode: string) => {
     if (window.location.hostname === 'localhost') {
       document.cookie = `googtrans=/en/${langCode}; path=/;`;
@@ -92,37 +162,38 @@ export default function Nav() {
 
   return (
     <>
-      {/* Target selector placeholder hook required by Google API */}
       <div id="google_translate_element" style={{ display: 'none' }} />
 
-      <nav
+      <motion.nav
         className={`${styles.nav} ${scrolled ? styles.scrolled : ''} ${
           hidden ? styles.hidden : ''
         }`}
+        variants={navContainer}
+        initial={prefersReduced ? 'visible' : 'hidden'}
+        animate="visible"
       >
-        {/* Logo wrapper using your precise inline SVG engine */}
-        <a href="#" className={styles.logo}>
+        <motion.a href="#" className={styles.logo} variants={navItem}>
           <LogoSync3 className="w-auto h-4 md:h-5" />
-        </a>
+        </motion.a>
 
-        {/* Desktop elements layout grouping links */}
         <div className={styles.navRight}>
           <ul className={styles.links}>
             {links.map((l) => (
-              <li key={l.href}>
+              <motion.li key={l.href} variants={navItem}>
                 <a href={l.href} className={styles.link}>
                   {l.label}
                 </a>
-              </li>
+              </motion.li>
             ))}
           </ul>
         </div>
 
-        {/* Mobile hamburger */}
-        <button
+        <motion.button
           className={styles.burger}
           onClick={() => setMenuOpen((o) => !o)}
-          aria-label="Toggle menu"
+          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={menuOpen}
+          variants={navItem}
         >
           <span
             className={`${styles.bar} ${menuOpen ? styles.barOpen1 : ''}`}
@@ -133,27 +204,94 @@ export default function Nav() {
           <span
             className={`${styles.bar} ${menuOpen ? styles.barOpen3 : ''}`}
           />
-        </button>
-      </nav>
+        </motion.button>
+      </motion.nav>
 
-      {/* Mobile drawer layout config */}
-      <div className={`${styles.drawer} ${menuOpen ? styles.drawerOpen : ''}`}>
-        <ul className={styles.drawerLinks}>
-          {links.map((l) => (
-            <li key={l.href}>
-              <a
-                href={l.href}
-                className={styles.drawerLink}
-                onClick={closeMenu}
-              >
-                {l.label}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            key="overlay"
+            className={styles.overlay}
+            variants={overlayVariants}
+            initial="closed"
+            animate="open"
+            exit="closed"
+            onClick={closeMenu}
+          />
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.aside
+            key="panel"
+            className={styles.drawer}
+            variants={panelVariants}
+            initial="closed"
+            animate="open"
+            exit="closed"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Main menu"
+          >
+            <div className={styles.drawerHeader}>
+              <a href="#" className={styles.logoDrawer} onClick={closeMenu}>
+                <LogoSync3 className="w-auto h-4" />
               </a>
-            </li>
-          ))}
-        </ul>
-      </div>
+              <button
+                className={styles.drawerClose}
+                onClick={closeMenu}
+                aria-label="Close menu"
+              >
+                <span />
+                <span />
+              </button>
+            </div>
 
-      {menuOpen && <div className={styles.overlay} onClick={closeMenu} />}
+            <ul className={styles.drawerLinks}>
+              {links.map((l, i) => (
+                <motion.li
+                  key={l.href}
+                  variants={drawerLinkVariants}
+                  custom={i}
+                  initial="closed"
+                  animate="open"
+                >
+                  <a
+                    href={l.href}
+                    className={styles.drawerLink}
+                    onClick={closeMenu}
+                  >
+                    {l.label}
+                  </a>
+                </motion.li>
+              ))}
+            </ul>
+
+            <div className={styles.drawerFooter}>
+              <span className={styles.drawerLabel}>Language</span>
+              <div className={styles.langToggle}>
+                <button
+                  className={`${styles.langBtn} ${
+                    currentLang === 'en' ? styles.langBtnActive : ''
+                  }`}
+                  onClick={() => handleTranslate('en')}
+                >
+                  EN
+                </button>
+                <button
+                  className={`${styles.langBtn} ${
+                    currentLang === 'ar' ? styles.langBtnActive : ''
+                  }`}
+                  onClick={() => handleTranslate('ar')}
+                >
+                  AR
+                </button>
+              </div>
+            </div>
+          </motion.aside>
+        )}
+      </AnimatePresence>
     </>
   );
 }
