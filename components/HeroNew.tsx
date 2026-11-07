@@ -4,19 +4,22 @@
 import { useRef, useEffect } from 'react';
 import styles from './HeroNew.module.css';
 import { motion, useReducedMotion, type Variants } from 'framer-motion';
-import AnimatedText from '@/components/AnimatedText';
+import AnimatedText from './AnimatedText';
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
+// Tune this ONE value to control how long the video plays before
+// any text appears. Try 1.2, 1.8, 2.4, or 3.0.
+const HERO_DELAY = 5.8;
+
 // Container orchestrates timing; children fire in sequence.
-// Delay down from 1.2s so text starts within the first second.
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
       staggerChildren: 0.12,
-      delayChildren: 0.6,
+      delayChildren: HERO_DELAY,
     },
   },
 };
@@ -91,12 +94,15 @@ export default function HeroNew() {
           </motion.div>
 
           {/* Three locked lines, each word-cascades. Same <br> layout,
-              same <h1>, same italic accent — only the animation changed. */}
+              same <h1>, same italic accent — only the animation changed.
+              Delays are offset by HERO_DELAY so the cascade fires AFTER
+              the parent's opacity transition starts (otherwise the words
+              animate invisibly under the hidden parent). */}
           <h1 className={styles.headline}>
             <AnimatedText
               text="WE DESIGN."
               wordDelay={0.08}
-              delay={0.15}
+              delay={HERO_DELAY + 0.05}
               maskPadY={0.22}
               maskPadX={0.06}
             />
@@ -104,7 +110,7 @@ export default function HeroNew() {
             <AnimatedText
               text="WE BUILD."
               wordDelay={0.08}
-              delay={0.35}
+              delay={HERO_DELAY + 0.25}
               maskPadY={0.22}
               maskPadX={0.06}
             />
@@ -116,7 +122,7 @@ export default function HeroNew() {
                 </em>,
               ]}
               wordDelay={0.08}
-              delay={0.55}
+              delay={HERO_DELAY + 0.45}
               maskPadY={0.22}
               maskPadX={0.06}
             />
