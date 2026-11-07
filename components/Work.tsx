@@ -3,6 +3,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import { motion, useReducedMotion } from 'framer-motion';
 import styles from './Work.module.css';
 
 interface Project {
@@ -68,7 +69,6 @@ const projects: Project[] = [
     year: '2023',
     country: 'Sri Lanka',
     desc: 'Bold event poster series for an underground collective.',
-
     image: '/images/music-party.jpg',
   },
   {
@@ -284,12 +284,16 @@ const projects: Project[] = [
 
 const filters = ['Web', '3D', 'Packaging', 'Logo', 'Poster', 'Flyer'];
 
+const padIndex = (n: number) => String(n).padStart(2, '0');
+
 export default function Work() {
   const [active, setActive] = useState('Web');
   const [selectedMedia, setSelectedMedia] = useState<{
     src: string;
     type: 'image' | 'video';
   } | null>(null);
+
+  const prefersReduced = useReducedMotion();
 
   const filtered = projects.filter(
     (p) => p.type.toLowerCase() === active.toLowerCase(),
@@ -308,7 +312,13 @@ export default function Work() {
   return (
     <section className={styles.section} id="work">
       {/* Frosted Glass Header Container with Modern Pill Filter Controls */}
-      <div className={styles.glassHeaderContainer}>
+      <motion.div
+        className={styles.glassHeaderContainer}
+        initial={prefersReduced ? false : { opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-80px' }}
+        transition={{ duration: 0.7, ease: [0.25, 1, 0.5, 1] }}
+      >
         <div className={styles.header}>
           <p className={styles.tag}>Our Work</p>
           <h2 className={styles.headline}>
@@ -331,11 +341,11 @@ export default function Work() {
             </button>
           ))}
         </div>
-      </div>
+      </motion.div>
 
       <div className={styles.grid}>
         {filtered.map((p, i) => {
-          const Wrapper = p.link ? 'a' : 'div';
+          const Wrapper = p.link ? motion.a : motion.div;
           return (
             <Wrapper
               key={p.name}
@@ -343,9 +353,17 @@ export default function Work() {
               target={p.link ? '_blank' : undefined}
               rel={p.link ? 'noopener noreferrer' : undefined}
               className={`${styles.item} ${p.link ? styles.linkItem : ''}`}
+              initial={prefersReduced ? false : { opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-40px' }}
+              transition={{
+                duration: 0.55,
+                ease: [0.25, 1, 0.5, 1],
+                delay: prefersReduced ? 0 : Math.min(i * 0.05, 0.3),
+              }}
             >
               <div className={styles.itemLeft}>
-                <span className={styles.num}>0{i + 1}</span>
+                <span className={styles.num}>{padIndex(i + 1)}</span>
                 <div>
                   <h3 className={styles.projectName}>
                     {p.name}
@@ -355,7 +373,7 @@ export default function Work() {
                 </div>
               </div>
 
-              {/* Media Preview (Supports both Videos & Images natively with square 1080x1080 styling) */}
+              {/* Media Preview (Supports both Videos & Images natively) */}
               <div
                 className={styles.imagePreview}
                 onClick={(e) => {
@@ -380,8 +398,8 @@ export default function Work() {
                   <Image
                     src={p.image}
                     alt={p.name}
-                    width={400}
-                    height={250}
+                    fill
+                    sizes="140px"
                     className={styles.projectImage}
                   />
                 ) : null}
@@ -403,17 +421,25 @@ export default function Work() {
 
       {/* Zoom Modal Viewer */}
       {selectedMedia && (
-        <div
+        <motion.div
           className={styles.modalOverlay}
           onClick={() => setSelectedMedia(null)}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.25 }}
         >
-          <div
+          <motion.div
             className={styles.modalContent}
             onClick={(e) => e.stopPropagation()}
+            initial={prefersReduced ? false : { opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.35, ease: [0.25, 1, 0.5, 1] }}
           >
             <button
               className={styles.closeButton}
               onClick={() => setSelectedMedia(null)}
+              aria-label="Close preview"
             >
               &times;
             </button>
@@ -447,8 +473,8 @@ export default function Work() {
                 </div>
               )}
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       )}
     </section>
   );
