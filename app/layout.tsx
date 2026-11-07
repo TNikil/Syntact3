@@ -27,7 +27,6 @@ export default function RootLayout({
           body { top: 0px !important; }
           .goog-te-gadget { display: none !important; }
         `}</style>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
       </head>
       <body>
         {children}
