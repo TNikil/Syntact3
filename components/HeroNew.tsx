@@ -10,7 +10,7 @@ const ease = [0.16, 1, 0.3, 1] as const;
 
 // Tune this ONE value to control how long the video plays before
 // any text appears. Try 1.2, 1.8, 2.4, or 3.0.
-const HERO_DELAY = 9.8;
+const HERO_DELAY = 14;
 
 // Container orchestrates timing; children fire in sequence.
 const containerVariants: Variants = {
