@@ -35,7 +35,7 @@ const projects: Project[] = [
     country: 'Sri Lanka',
     desc: 'Airbnb-style listing site with booking flow. An SLTDA approved sanctuary designed for those who seek tranquility, comfort, and effortless convenience.',
     link: 'https://rianrest.com',
-    image: '/images/rianrest.jpg',
+    image: '/images/rianrest.png',
   },
   {
     name: 'Grace Flower and More',
