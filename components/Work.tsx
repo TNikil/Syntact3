@@ -44,7 +44,7 @@ const projects: Project[] = [
     country: 'UAE',
     desc: 'Ecommerce florist website to deal across UAE.',
     link: 'https://grace-flower-boutique-2.vercel.app/',
-    image: '/images/grace.jpg',
+    image: '/images/grace.png',
   },
   {
     name: 'Plaka Cafe',
@@ -134,7 +134,7 @@ const projects: Project[] = [
     year: '2025',
     country: 'Sri Lanka',
     desc: 'Sun and beaches represnt this logo',
-    image: '/images/rianrest_logo.jpg',
+    image: '/images/rianrest.png',
   },
   {
     name: 'Wedding Invitation',
