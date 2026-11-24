@@ -101,7 +101,7 @@ const projects: Project[] = [
     type: 'Logo',
     year: '2026',
     country: 'UAE',
-    desc: 'Clean logo and packaging system for an organic brand.',
+    desc: 'Online Flower and events company',
     image: '/images/grace_2.png',
   },
   {
@@ -176,6 +176,22 @@ const projects: Project[] = [
     country: 'Sri Lanka',
     desc: 'Custom packaging for US based spices company.',
     image: '/images/cervox.jpg',
+  },
+  {
+    name: 'RICH',
+    type: 'Packaging',
+    year: '2016',
+    country: 'Qatar',
+    desc: 'Custom packaging for Qatar company',
+    image: '/images/rich.png',
+  },
+  {
+    name: 'FOUR',
+    type: '3D',
+    year: '2016',
+    country: 'UAE',
+    desc: 'Advertising materials for UAE based company.',
+    image: '/images/four.png',
   },
   {
     name: 'Verginia honey',
@@ -280,6 +296,14 @@ const projects: Project[] = [
     country: 'UK',
     desc: 'Product Visualization for furniture company.',
     video: '/videos/michel.mp4',
+  },
+  {
+    name: 'RICH',
+    type: '3D',
+    year: '2017',
+    country: 'Qatar',
+    desc: 'Animation.',
+    video: '/videos/rich.mp4',
   },
   {
     name: 'Table 01',
