@@ -97,6 +97,14 @@ const projects: Project[] = [
     image: '/images/lotus-beverage.jpg',
   },
   {
+    name: 'Grace',
+    type: 'Logo',
+    year: '2026',
+    country: 'UAE',
+    desc: 'Clean logo and packaging system for an organic brand.',
+    image: '/images/grace_2.png',
+  },
+  {
     name: 'Crevox',
     type: 'Logo',
     year: '2016',
