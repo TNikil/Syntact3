@@ -130,7 +130,7 @@ export default function HeroNew() {
 
           <motion.div variants={descVariants} className={styles.bottomSplit}>
             <p className={styles.desc}>
-              Syntac3 is a creative Agency crafting bold digital experiences —
+              Syntact3 is a creative Agency crafting bold digital experiences —
               from pixel-perfect designs to powerful web builds.
             </p>
 
